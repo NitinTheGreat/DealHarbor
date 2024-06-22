@@ -1,14 +1,14 @@
 'use client';
-import { useState } from 'react';
-import PaymentDropdown from '../components/modalNav';
+import React, { useState } from 'react';
+import PaymentDropdown from '../components/modalNav'; // Adjust import path as necessary
 
-const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [activeLink, setActiveLink] = useState('');
+const Navbar: React.FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [activeLink, setActiveLink] = useState<string>('');
 
-    const handleLinkClick = (link) => {
+    const handleLinkClick = (link: string) => {
         setActiveLink(link);
-        // setIsOpen(false); // Close the menu on mobile view after clicking a link
+       
     };
 
     const toggleMenu = () => {
@@ -57,7 +57,7 @@ const Navbar = () => {
                                     activeLink === 'Join Slack' ? 'bg-gray-100' : ''
                                 }`}
                             >
-                                <PaymentDropdown toggleDropdown={toggleMenu} />
+                                <PaymentDropdown /> {/* Pass toggleMenu as toggleDropdown */}
                             </a>
                             <a
                                 href="#"

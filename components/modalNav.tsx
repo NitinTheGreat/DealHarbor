@@ -1,16 +1,18 @@
-'use client';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const PaymentDropdown = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = useRef(null);
+interface PaymentDropdownProps {
+    toggleDropdown: () => void; // Define the type for toggleDropdown prop
+}
+const PaymentDropdown: React.FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const dropdownRef = useRef<HTMLDivElement | null>(null); // Define the type for dropdownRef
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
 
-    const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
             setIsOpen(false);
         }
     };
@@ -51,24 +53,24 @@ const PaymentDropdown = () => {
             </div>
             {isOpen && (
                 <div
-                    className="absolute left-0 mt-2 w-full sd:static md:left-auto bg-gray-400 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50"
+                    className="absolute left-0 mt-2 w-full bg-gray-400 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50"
                     style={{ minWidth: 'max-content' }}
                     ref={dropdownRef}
                 >
                     <div className="py-1 z-50 bg-red-200" role="menu" aria-labelledby="options-menu">
                         <a
                             href="#"
-                            className="block px-4  py-2  z-50 text-md text-black hover:bg-gray-100 hover:text-gray-900"
+                            className="block px-4 py-2 text-md text-black hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem"
                         >
-                            <span className="flex flex-col z-50">
+                            <span className="flex flex-col">
                                 <span className="lg:hidden">Bicycles</span>
                                 <span className="hidden lg:flex">Shop Bicycles</span>
                             </span>
                         </a>
                         <a
                             href="#"
-                            className="block px-4 py-2 text-md  z-50 text-black hover:bg-gray-100 hover:text-gray-900"
+                            className="block px-4 py-2 text-md text-black hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem"
                         >
                             <span className="flex flex-col">
@@ -78,7 +80,7 @@ const PaymentDropdown = () => {
                         </a>
                         <a
                             href="#"
-                            className="block px-4 py-2 text-md  z-50 text-black hover:bg-gray-100 hover:text-gray-900"
+                            className="block px-4 py-2 text-md text-black hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem"
                         >
                             <span className="flex flex-col">
