@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import PaymentDropdown from '../components/modalNav';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -7,11 +8,15 @@ const Navbar = () => {
 
     const handleLinkClick = (link) => {
         setActiveLink(link);
-        setIsOpen(false); // Close the menu on mobile view after clicking a link
+        // setIsOpen(false); // Close the menu on mobile view after clicking a link
+    };
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
     };
 
     return (
-        <nav className="relative bg-white shadow">
+        <nav className="relative bg-white shadow sticky z-1">
             <div className="container px-6 py-4 mx-auto">
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
@@ -21,17 +26,17 @@ const Navbar = () => {
 
                         <div className="flex lg:hidden">
                             <button
-                                onClick={() => setIsOpen(!isOpen)}
+                                onClick={toggleMenu}
                                 type="button"
                                 className="text-gray-900 hover:text-gray-600 focus:outline-none focus:text-gray-600"
                                 aria-label="toggle menu"
                             >
                                 {!isOpen ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16M4 16h16" />
                                     </svg>
                                 ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 )}
@@ -44,21 +49,21 @@ const Navbar = () => {
                             isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full'
                         }`}
                     >
-                        <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
+                        <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:ml-8 lg:mr-36">
                             <a
                                 href="#"
                                 onClick={() => handleLinkClick('Join Slack')}
                                 className={`px-3 py-2 mx-3 mt-2 text-gray-900 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 ${
-                                    activeLink === 'Join Slack' ? 'underline' : ''
+                                    activeLink === 'Join Slack' ? 'bg-gray-100' : ''
                                 }`}
                             >
-                                Join Slack
+                                <PaymentDropdown toggleDropdown={toggleMenu} />
                             </a>
                             <a
                                 href="#"
                                 onClick={() => handleLinkClick('Browse Topics')}
                                 className={`px-3 py-2 mx-3 mt-2 text-gray-900 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 ${
-                                    activeLink === 'Browse Topics' ? 'underline' : ''
+                                    activeLink === 'Browse Topics' ? 'bg-gray-100' : ''
                                 }`}
                             >
                                 Browse Topics
@@ -67,7 +72,7 @@ const Navbar = () => {
                                 href="#"
                                 onClick={() => handleLinkClick('Random Item')}
                                 className={`px-3 py-2 mx-3 mt-2 text-gray-900 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 ${
-                                    activeLink === 'Random Item' ? 'underline' : ''
+                                    activeLink === 'Random Item' ? 'bg-gray-100' : ''
                                 }`}
                             >
                                 Random Item
@@ -76,7 +81,7 @@ const Navbar = () => {
                                 href="#"
                                 onClick={() => handleLinkClick('Experts')}
                                 className={`px-3 py-2 mx-3 mt-2 text-gray-900 transition-colors duration-300 transform rounded-md lg:mt-0 hover:bg-gray-100 ${
-                                    activeLink === 'Experts' ? 'underline' : ''
+                                    activeLink === 'Experts' ? 'bg-gray-100' : ''
                                 }`}
                             >
                                 Experts
@@ -86,7 +91,7 @@ const Navbar = () => {
                         <div className="flex items-center mt-4 lg:mt-0">
                             <a
                                 href="#"
-                                className="hidden lg:block mx-4 text-gray-900 transition-colors duration-300 transform hover:text-gray-700 focus:text-gray-700 focus:outline-none"
+                                className="block mx-4 text-gray-900 transition-colors duration-300 transform hover:text-gray-700 focus:text-gray-700 focus:outline-none"
                                 aria-label="view cart"
                             >
                                 <img src="/images/cart.svg" alt="Cart" className="w-6 h-6" />
@@ -100,8 +105,6 @@ const Navbar = () => {
                                         alt="avatar"
                                     />
                                 </div>
-
-                                <h3 className="mx-2 text-gray-900 lg:hidden">Khatab wedaa</h3>
                             </button>
                         </div>
                     </div>
