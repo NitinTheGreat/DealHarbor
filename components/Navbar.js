@@ -101,7 +101,7 @@ const Navbar = () => {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css"
       />
-      <title>Responsive navbar with search and login - Bedimcode</title>
+
       <header className="header" id="header">
         <nav className="nav container">
           <a href="#" className="nav__logo">
@@ -143,7 +143,7 @@ const Navbar = () => {
           <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" />
             <i className="ri-user-line nav__login" id="login-btn" />
-            <i className="ri-shopping-cart-line" id="Cart" />
+            <i className="ri-shopping-cart-line nav__cart" id="Cart" />
 
             <div className="nav__toggle" id="nav-toggle">
               <i className="ri-menu-line" />

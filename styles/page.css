@@ -1,14 +1,7 @@
 .spline {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   
     width: 100vw;
     height: 100vh;
   }
   
-  .spline-iframe {
-    width: 50vw;
-    height: 60vh;
-    border: 0; /* Remove default border for better appearance */
-  }
   

@@ -13,6 +13,7 @@
   --body-color: hsl(230, 100%, 98%);
   --container-color: hsl(230, 100%, 97%);
   --border-color: hsl(230, 25%, 80%);
+  --overlay-color: rgba(100, 100, 100, 0.5); /* New: Overlay color for micro-interactions */
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
@@ -60,24 +61,24 @@ body {
   background-color: var(--body-color);
   color: var(--text-color);
 }
-.nav {
-position: sticky !important;
-top: 0;
-}
 
+.nav {
+  position: sticky !important;
+  top: 0;
+}
 
 input,
 button {
   border: none;
   outline: none;
 }
-.nav__logo{
- margin-left: 2px;
+
+.nav__logo {
+  margin-left: 2px;
 }
-.nav__logo img{
+
+.nav__logo img {
   width: 100px;
-
-
 }
 
 ul {
@@ -124,13 +125,13 @@ img {
   width: 100%;
   height: 100%;
   z-index: var(--z-modal);
-  background-color: hsla(230, 75%, 15%, .1);
+  background-color: hsla(230, 75%, 15%, 0.1);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px); /* For safari */
   padding: 8rem 1.5rem 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .4s;
+  transition: opacity 0.4s;
 }
 
 .search__close,
@@ -150,7 +151,7 @@ img {
   left: 0;
   width: 100%;
   background-color: var(--body-color);
-  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+  box-shadow: 0 2px 16px hsla(230, 75%, 32%, 0.15);
   z-index: var(--z-fixed);
 }
 
@@ -164,7 +165,7 @@ img {
 .nav__logo {
   color: var(--title-color);
   font-weight: var(--font-semi-bold);
-  transition: color .4s;
+  transition: color 0.4s;
 }
 
 .nav__actions {
@@ -174,18 +175,47 @@ img {
   margin-right: 3rem;
 }
 
-.nav__search, 
-.nav__login, 
-.nav__toggle, 
-.nav__close {
+.nav__search,
+.nav__login,
+.nav__toggle,
+.nav__close ,
+.nav__cart
+{
   font-size: 1.25rem;
   color: var(--title-color);
   cursor: pointer;
-  transition: color .4s;
+  transition: color 0.4s;
 }
 
-:is(.nav__logo, .nav__search, .nav__login, .nav__toggle, .nav__link):hover {
+
+.nav__link {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  position: relative; /* New: Position relative for micro-interaction */
+  transition: color 0.4s;
+}
+
+.nav__link::before {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Adjust as needed */
+  left: 0;
+  width: 100%;
+  height: 3px; /* Height of the underline */
+  background-color: transparent; /* Initially transparent */
+  opacity: 0;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.nav__link:hover,
+.nav__link.active {
   color: var(--first-color);
+}
+
+.nav__link:hover::before,
+.nav__link.active::before {
+  opacity: 1;
+  background-color: var(--overlay-color); /* Semi-transparent background */
 }
 
 /* Navigation for mobile devices */
@@ -195,10 +225,10 @@ img {
     top: -100%;
     left: 0;
     background-color: var(--body-color);
-    box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
+    box-shadow: 0 8px 16px hsla(230, 75%, 32%, 0.15);
     width: 100%;
     padding-block: 4.5rem 4rem;
-    transition: top .4s;
+    transition: top 0.4s;
   }
 }
 
@@ -207,12 +237,6 @@ img {
   flex-direction: column;
   row-gap: 2.5rem;
   text-align: center;
-}
-
-.nav__link {
-  color: var(--title-color);
-  font-weight: var(--font-semi-bold);
-  transition: color .4s;
 }
 
 .nav__close {
@@ -230,13 +254,13 @@ img {
 .search__form {
   display: flex;
   align-items: center;
-  column-gap: .5rem;
+  column-gap: 0.5rem;
   background-color: var(--container-color);
-  box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+  box-shadow: 0 8px 32px hsla(230, 75%, 15%, 0.2);
   padding-inline: 1rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   transform: translateY(-1rem);
-  transition: transform .4s;
+  transition: transform 0.4s;
 }
 
 .search__icon {
@@ -266,7 +290,7 @@ img {
 }
 
 /*=============== LOGIN ===============*/
-.login__form, 
+.login__form,
 .login__group {
   display: grid;
 }
@@ -274,12 +298,12 @@ img {
 .login__form {
   background-color: var(--container-color);
   padding: 2rem 1.5rem 2.5rem;
-  box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+  box-shadow: 0 8px 32px hsla(230, 75%, 15%, 0.2);
   border-radius: 1rem;
   row-gap: 1.25rem;
   text-align: center;
   transform: translateY(-1rem);
-  transition: transform .4s;
+  transition: transform 0.4s;
 }
 
 .login__title {
@@ -296,7 +320,7 @@ img {
   text-align: initial;
   color: var(--title-color);
   font-weight: var(--font-medium);
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .login__input {
@@ -304,7 +328,7 @@ img {
   background-color: var(--container-color);
   border: 2px solid var(--border-color);
   padding: 1rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   color: var(--text-color);
 }
 
@@ -313,7 +337,7 @@ img {
 }
 
 .login__signup {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .login__signup a {
@@ -333,13 +357,13 @@ img {
   color: #fff;
   font-weight: var(--font-semi-bold);
   padding: 1rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: box-shadow .4s;
+  transition: box-shadow 0.4s;
 }
 
 .login__button:hover {
-  box-shadow: 0 4px 24px hsla(230, 75%, 40%, .4);
+  box-shadow: 0 4px 24px hsla(230, 75%, 40%, 0.4);
 }
 
 /* Show login */
@@ -387,13 +411,16 @@ img {
     height: calc(var(--header-height) + 2rem);
     column-gap: 3rem;
   }
-  .nav__close, 
+
+  .nav__close,
   .nav__toggle {
     display: none;
   }
+
   .nav__menu {
     margin-left: auto;
   }
+
   .nav__list {
     flex-direction: row;
     column-gap: 3rem;
