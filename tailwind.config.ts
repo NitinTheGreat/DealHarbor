@@ -1,3 +1,4 @@
+// tailwind.config.js
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -8,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        customRed: '#FF0000', // Add your custom red color here
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -17,4 +21,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
