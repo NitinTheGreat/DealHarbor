@@ -1,9 +1,9 @@
 import React from 'react'
-
+import ProductGrid from '../../components/product'
 const bicycles = () => {
   return (
     <div>
-      Bicycles Page
+      <ProductGrid />
     </div>
   )
 }

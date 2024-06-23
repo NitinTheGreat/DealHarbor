@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
+import Link from "next/link";
 import "../styles/navStyle.css";
 
 const Navbar = () => {
@@ -104,42 +105,39 @@ const Navbar = () => {
 
       <header className="header" id="header">
         <nav className="nav container">
-          <a href="#" className="nav__logo">
-            <img src="../images/logo.png" alt="logo" />
-          </a>
+          <Link href="/" className="nav__logo">
+            <div className="logo">
+              <img src="../images/logo.png" alt="logo" />
+              <h1>Deal Harbor</h1>
+            </div>
+          </Link>
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
               <li className="nav__item">
-                <a href="#" className="nav__link">
-                  Home
-                </a>
+                <Link href="/bicycles" className="nav__link">
+                  Bicycles
+                </Link>
               </li>
               <li className="nav__item">
-                <a href="#" className="nav__link">
-                  About Us
-                </a>
+                <Link href="/electronics" className="nav__link">
+                  Electronics
+                </Link>
               </li>
               <li className="nav__item">
-                <a href="#" className="nav__link">
-                  Services
-                </a>
+                <Link href="/stationary" className="nav__link">
+                  Stationary
+                </Link>
               </li>
               <li className="nav__item">
-                <a href="#" className="nav__link">
-                  Featured
-                </a>
-              </li>
-              <li className="nav__item">
-                <a href="#" className="nav__link">
-                  Contact Me
-                </a>
+                <Link href="/sell" className="nav__link">
+                  Sell Item
+                </Link>
               </li>
             </ul>
             <div className="nav__close" id="nav-close">
               <i className="ri-close-line" />
             </div>
           </div>
-          {/* test */}
           <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" />
             <i className="ri-user-line nav__login" id="login-btn" />
@@ -149,7 +147,6 @@ const Navbar = () => {
               <i className="ri-menu-line" />
             </div>
           </div>
-          {/* ends */}
         </nav>
       </header>
       <div className="search" id="search">
@@ -192,11 +189,11 @@ const Navbar = () => {
           </div>
           <div>
             <p className="login__signup">
-              You do not have an account? <a href="#">Sign up</a>
+              You do not have an account? <Link href="#">Sign up</Link>
             </p>
-            <a href="#" className="login__forgot">
+            <Link href="#" className="login__forgot">
               You forgot your password
-            </a>
+            </Link>
             <button type="submit" className="login__button">
               Log In
             </button>

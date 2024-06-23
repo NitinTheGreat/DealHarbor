@@ -1,9 +1,9 @@
 import React from 'react'
-
+import ProductGrid from '../../components/product'
 const Electronics = () => {
   return (
     <div>
-      Electronics Page
+      <ProductGrid/>
     </div>
   )
 }
