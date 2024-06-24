@@ -8,9 +8,9 @@
 
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(230, 75%, 56%);
-  --title-color: hsl(230, 75%, 15%);
-  --text-color: hsl(230, 12%, 40%);
+  --first-color: #7743DB;
+  --title-color: #C3ACDO;
+  --text-color: hsl(205, 53%, 15%);
   --body-color: hsl(230, 100%, 98%);
   --container-color: hsl(230, 100%, 97%);
   --border-color: hsl(230, 25%, 80%);
@@ -220,12 +220,15 @@ img {
 .nav__link:hover,
 .nav__link.active {
   color: var(--first-color);
+  
 }
 
 .nav__link:hover::before,
 .nav__link.active::before {
   opacity: 1;
-  background-color: var(--overlay-color); /* Semi-transparent background */
+  background-color: var(--overlay-color); 
+  transform: translateY(-2px); 
+  transition: transform 0.3s ease;
 }
 
 /* Navigation for mobile devices */
@@ -440,6 +443,16 @@ img {
     padding: 3rem 2rem 3.5rem;
   }
 }
+.nav__link.active::before {
+  opacity: 1;
+  background-color: var(--first-color);
+}
+.nav__link:hover {
+  color: var(--first-color);
+  transform: translateY(-2px); 
+  transition: transform 0.3s ease;
+}
+
 
 @media screen and (min-width: 1150px) {
   .container {

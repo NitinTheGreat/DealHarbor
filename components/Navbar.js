@@ -1,13 +1,15 @@
-"use client";
-import React, { useEffect } from "react";
+'use client';
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "../styles/navStyle.css";
 
 const Navbar = () => {
+  const [activeLink, setActiveLink] = useState("");
+
   useEffect(() => {
-    const navMenu = document.getElementById("nav-menu"),
-      navToggle = document.getElementById("nav-toggle"),
-      navClose = document.getElementById("nav-close");
+    const navMenu = document.getElementById("nav-menu");
+    const navToggle = document.getElementById("nav-toggle");
+    const navClose = document.getElementById("nav-close");
 
     const showMenu = () => {
       navMenu.classList.add("show-menu");
@@ -17,19 +19,17 @@ const Navbar = () => {
       navMenu.classList.remove("show-menu");
     };
 
-    /* Menu show */
     if (navToggle) {
       navToggle.addEventListener("click", showMenu);
     }
 
-    /* Menu hidden */
     if (navClose) {
       navClose.addEventListener("click", hideMenu);
     }
 
-    const search = document.getElementById("search"),
-      searchBtn = document.getElementById("search-btn"),
-      searchClose = document.getElementById("search-close");
+    const search = document.getElementById("search");
+    const searchBtn = document.getElementById("search-btn");
+    const searchClose = document.getElementById("search-close");
 
     const showSearch = () => {
       search.classList.add("show-search");
@@ -39,19 +39,17 @@ const Navbar = () => {
       search.classList.remove("show-search");
     };
 
-    /* Search show */
     if (searchBtn) {
       searchBtn.addEventListener("click", showSearch);
     }
 
-    /* Search hidden */
     if (searchClose) {
       searchClose.addEventListener("click", hideSearch);
     }
 
-    const login = document.getElementById("login"),
-      loginBtn = document.getElementById("login-btn"),
-      loginClose = document.getElementById("login-close");
+    const login = document.getElementById("login");
+    const loginBtn = document.getElementById("login-btn");
+    const loginClose = document.getElementById("login-close");
 
     const showLogin = () => {
       login.classList.add("show-login");
@@ -61,12 +59,10 @@ const Navbar = () => {
       login.classList.remove("show-login");
     };
 
-    /* Login show */
     if (loginBtn) {
       loginBtn.addEventListener("click", showLogin);
     }
 
-    /* Login hidden */
     if (loginClose) {
       loginClose.addEventListener("click", hideLogin);
     }
@@ -94,6 +90,10 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleSetActiveLink = (link) => {
+    setActiveLink(link);
+  };
+
   return (
     <>
       <meta charSet="UTF-8" />
@@ -114,22 +114,46 @@ const Navbar = () => {
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
               <li className="nav__item">
-                <Link href="/bicycles" className="nav__link">
+                <Link
+                  href="/bicycles"
+                  className={`nav__link ${
+                    activeLink === "bicycles" ? "active" : ""
+                  }`}
+                  onClick={() => handleSetActiveLink("bicycles")}
+                >
                   Bicycles
                 </Link>
               </li>
               <li className="nav__item">
-                <Link href="/electronics" className="nav__link">
+                <Link
+                  href="/electronics"
+                  className={`nav__link ${
+                    activeLink === "electronics" ? "active" : ""
+                  }`}
+                  onClick={() => handleSetActiveLink("electronics")}
+                >
                   Electronics
                 </Link>
               </li>
               <li className="nav__item">
-                <Link href="/stationary" className="nav__link">
+                <Link
+                  href="/stationary"
+                  className={`nav__link ${
+                    activeLink === "stationary" ? "active" : ""
+                  }`}
+                  onClick={() => handleSetActiveLink("stationary")}
+                >
                   Stationary
                 </Link>
               </li>
               <li className="nav__item">
-                <Link href="/sell" className="nav__link">
+                <Link
+                  href="/sell"
+                  className={`nav__link ${
+                    activeLink === "sell" ? "active" : ""
+                  }`}
+                  onClick={() => handleSetActiveLink("sell")}
+                >
                   Sell Item
                 </Link>
               </li>
