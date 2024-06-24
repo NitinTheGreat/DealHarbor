@@ -483,14 +483,22 @@ img {
   position: fixed;
   top: 0;
   right: 0;
-  width: 28vh;
-  background-color: gray; /* Update to match your design */
+  width: 25vh;
   height: 100%;
+  background-color: rgba(63, 33, 72, 0.2); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect */
   z-index: 110; /* Ensure this is higher than the navbar */
   transition: transform 0.3s ease-in-out;
   transform: translateX(100%); /* Hide sidebar initially */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for depth */
 }
 
+@media screen and (min-width: 767px){
+  .sidebar {
+    width: 40vh;
+  }
+  
+}
 /* Show the sidebar */
 .sidebar.show {
   transform: translateX(0); /* Move the sidebar into view */
