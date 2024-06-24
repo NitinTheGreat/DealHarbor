@@ -5,6 +5,7 @@ import "../styles/navStyle.css";
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState("");
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
   useEffect(() => {
     const navMenu = document.getElementById("nav-menu");
@@ -93,6 +94,9 @@ const Navbar = () => {
   const handleSetActiveLink = (link) => {
     setActiveLink(link);
   };
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
 
   return (
     <>
@@ -165,7 +169,7 @@ const Navbar = () => {
           <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" />
             <i className="ri-user-line nav__login" id="login-btn" />
-            <i className="ri-shopping-cart-line nav__cart" id="Cart" />
+            <i className="ri-shopping-cart-line nav__cart" id="Cart"  onClick={toggleSidebar}/>
 
             <div className="nav__toggle" id="nav-toggle">
               <i className="ri-menu-line" />
@@ -224,6 +228,21 @@ const Navbar = () => {
           </div>
         </form>
         <i className="ri-close-line login__close" id="login-close" />
+      </div>
+
+       {/* card sidebar */}
+       <div
+        className={`sidebar ${
+          isSidebarVisible ? "show" : ""
+        }`}
+      >
+        <h2 className="font-bold text-xl p-4">Your Cart</h2>
+        <span
+          className="close-icon cart-close"
+          onClick={toggleSidebar}
+        >
+          <i className="ri-close-line" />
+        </span>
       </div>
     </>
   );

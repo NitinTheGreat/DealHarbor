@@ -64,7 +64,7 @@ body {
 }
 
 .nav {
-  position: sticky !important;
+  /* position: sticky !important; */
   top: 0;
 }
 
@@ -243,6 +243,12 @@ img {
     padding-block: 4.5rem 4rem;
     transition: top 0.4s;
   }
+  .logo h1{
+    font-family: 'Calligraffitti', cursive;
+    font-size: 1rem;
+  
+  }
+ 
 }
 
 .nav__list {
@@ -389,6 +395,18 @@ img {
   transform: translateY(0);
 }
 
+@media screen and ((min-width: 300px) and (max-width: 400px)){
+  .logo img{
+    width: 80px;
+  }
+  .logo h1{
+    font-family: 'Calligraffitti', cursive;
+    font-size: 0.8rem;
+  
+  }
+  
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For medium devices */
 @media screen and (min-width: 576px) {
@@ -401,6 +419,7 @@ img {
     max-width: 450px;
     margin-inline: auto;
   }
+  
 
   .search__close,
   .login__close {
@@ -458,4 +477,29 @@ img {
   .container {
     margin-inline: auto;
   }
+}
+/* Card sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 28vh;
+  background-color: gray; /* Update to match your design */
+  height: 100%;
+  z-index: 110; /* Ensure this is higher than the navbar */
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%); /* Hide sidebar initially */
+}
+
+/* Show the sidebar */
+.sidebar.show {
+  transform: translateX(0); /* Move the sidebar into view */
+}
+.cart-close{
+  position: absolute;
+  top: 0.80rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
 }
