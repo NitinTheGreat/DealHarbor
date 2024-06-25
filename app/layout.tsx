@@ -1,9 +1,9 @@
-// Layout.tsx
+// layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { CartProvider } from "../context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <div className="absolute inset-0 -z-10 h-full w-full bg-purple-50 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div> */}
-        <Navbar />
-        {children}
+        <CartProvider>
+          <Navbar />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

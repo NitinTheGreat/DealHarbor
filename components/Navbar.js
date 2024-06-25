@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "../styles/navStyle.css";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
+import { useCart } from "../context/CartContext";
+
+
 const Navbar = () => {
+  const { cart, subTotal, addToCart, removeFromCart } = useCart(); // Changed
   const [activeLink, setActiveLink] = useState("");
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
@@ -109,6 +113,7 @@ const Navbar = () => {
 
       <header className="header" id="header">
         <nav className="nav container">
+        
           <Link href="/" className="nav__logo">
             <div className="logo">
               <img src="../images/logo.png" alt="logo" />
@@ -240,195 +245,32 @@ const Navbar = () => {
         </span>
 
         <ol className=" list-decimal font-semibold pl-8">
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
-          <li>
-            <div className=" item flex my-5">
-              <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum
-              </div>
-              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
-                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
-                <span className=" mx-2 text-sm">1</span>
-                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
-              </div>
-
-            </div>
-          </li>
+          {Object.keys(cart).map((itemCode) => { // Changed
+            const item = cart[itemCode]; // Changed
+            return ( // Changed
+              <li key={itemCode}> {/* Changed */}
+                <div className=" item flex my-5">
+                  <div className=" w-2/3 font-semibold">
+                    {item.name} {/* Changed */}
+                  </div>
+                  <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                    <AiFillMinusCircle className="cursor-pointer text-purple-400"
+                      onClick={() => removeFromCart(itemCode, 1)} /> {/* Changed */}
+                    <span className=" mx-2 text-sm">{item.qty}</span> {/* Changed */}
+                    <AiFillPlusCircle className="cursor-pointer text-purple-400"
+                      onClick={() => addToCart(itemCode, item.price, 1, item.name)} /> {/* Changed */}
+                  </div>
+                </div>
+              </li>
+            );
+          })} {/* Changed */}
         </ol>
 
         {/* subtotal and checkout button */}
         <div className="bottom">
           <div className="subtotal">
             <span className="total">Subtotal:</span>
-            <span className="price">₹ 2000</span>
+            <span className="price">₹{subTotal}</span> {/* Changed */}
           </div>
           <button className="button">
             <div className="default-btn flex items-center">
@@ -469,7 +311,7 @@ const Navbar = () => {
           </button>
         
 
-        <button class="btn"> Clear Cart
+        <button className="btn"> Clear Cart
         </button>
         </div>
 
