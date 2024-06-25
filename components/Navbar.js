@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import "../styles/navStyle.css";
-
+import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState("");
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -120,9 +120,8 @@ const Navbar = () => {
               <li className="nav__item">
                 <Link
                   href="/bicycles"
-                  className={`nav__link ${
-                    activeLink === "bicycles" ? "active" : ""
-                  }`}
+                  className={`nav__link ${activeLink === "bicycles" ? "active" : ""
+                    }`}
                   onClick={() => handleSetActiveLink("bicycles")}
                 >
                   Bicycles
@@ -131,9 +130,8 @@ const Navbar = () => {
               <li className="nav__item">
                 <Link
                   href="/electronics"
-                  className={`nav__link ${
-                    activeLink === "electronics" ? "active" : ""
-                  }`}
+                  className={`nav__link ${activeLink === "electronics" ? "active" : ""
+                    }`}
                   onClick={() => handleSetActiveLink("electronics")}
                 >
                   Electronics
@@ -142,9 +140,8 @@ const Navbar = () => {
               <li className="nav__item">
                 <Link
                   href="/stationary"
-                  className={`nav__link ${
-                    activeLink === "stationary" ? "active" : ""
-                  }`}
+                  className={`nav__link ${activeLink === "stationary" ? "active" : ""
+                    }`}
                   onClick={() => handleSetActiveLink("stationary")}
                 >
                   Stationary
@@ -153,9 +150,8 @@ const Navbar = () => {
               <li className="nav__item">
                 <Link
                   href="/sell"
-                  className={`nav__link ${
-                    activeLink === "sell" ? "active" : ""
-                  }`}
+                  className={`nav__link ${activeLink === "sell" ? "active" : ""
+                    }`}
                   onClick={() => handleSetActiveLink("sell")}
                 >
                   Sell Item
@@ -169,7 +165,7 @@ const Navbar = () => {
           <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" />
             <i className="ri-user-line nav__login" id="login-btn" />
-            <i className="ri-shopping-cart-line nav__cart" id="Cart"  onClick={toggleSidebar}/>
+            <i className="ri-shopping-cart-line nav__cart" id="Cart" onClick={toggleSidebar} />
 
             <div className="nav__toggle" id="nav-toggle">
               <i className="ri-menu-line" />
@@ -230,11 +226,10 @@ const Navbar = () => {
         <i className="ri-close-line login__close" id="login-close" />
       </div>
 
-       {/* card sidebar */}
-       <div
-        className={`sidebar ${
-          isSidebarVisible ? "show" : ""
-        }`}
+      {/* card sidebar */}
+      <div
+        className={`sidebar ${isSidebarVisible ? "show" : ""
+          }`}
       >
         <h2 className="font-bold text-xl p-4">Your Cart</h2>
         <span
@@ -243,6 +238,62 @@ const Navbar = () => {
         >
           <i className="ri-close-line" />
         </span>
+
+        <ol className=" list-decimal font-semibold pl-6">
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod fuga repellendus libero, voluptates iste natus numquam quibusdam at a ipsa.
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod fuga repellendus libero, voluptates iste natus numquam quibusdam at a ipsa.
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod fuga repellendus libero, voluptates iste natus numquam quibusdam at a ipsa.
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod fuga repellendus libero, voluptates iste natus numquam quibusdam at a ipsa.
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+        </ol>
+
       </div>
     </>
   );

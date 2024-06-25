@@ -491,6 +491,7 @@ img {
   transition: transform 0.3s ease-in-out;
   transform: translateX(100%); /* Hide sidebar initially */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for depth */
+  overflow-y: scroll;
 }
 
 @media screen and (min-width: 767px){
