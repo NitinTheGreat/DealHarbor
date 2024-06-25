@@ -239,11 +239,11 @@ const Navbar = () => {
           <i className="ri-close-line" />
         </span>
 
-        <ol className=" list-decimal font-semibold pl-6">
+        <ol className=" list-decimal font-semibold pl-8">
           <li>
             <div className=" item flex my-5">
               <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod fuga repellendus libero, voluptates iste natus numquam quibusdam at a ipsa.
+                Hercules Roadeo
               </div>
               <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
                 <AiFillMinusCircle className="cursor-pointer text-purple-400" />
@@ -256,7 +256,7 @@ const Navbar = () => {
           <li>
             <div className=" item flex my-5">
               <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod fuga repellendus libero, voluptates iste natus numquam quibusdam at a ipsa.
+                Hercules Roadeo
               </div>
               <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
                 <AiFillMinusCircle className="cursor-pointer text-purple-400" />
@@ -269,7 +269,7 @@ const Navbar = () => {
           <li>
             <div className=" item flex my-5">
               <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod fuga repellendus libero, voluptates iste natus numquam quibusdam at a ipsa.
+                Hercules Roadeo Lorem
               </div>
               <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
                 <AiFillMinusCircle className="cursor-pointer text-purple-400" />
@@ -282,7 +282,137 @@ const Navbar = () => {
           <li>
             <div className=" item flex my-5">
               <div className=" w-2/3 font-semibold">
-                Hercules Roadeo Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod fuga repellendus libero, voluptates iste natus numquam quibusdam at a ipsa.
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
+              </div>
+              <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                <AiFillMinusCircle className="cursor-pointer text-purple-400" />
+                <span className=" mx-2 text-sm">1</span>
+                <AiFillPlusCircle className="cursor-pointer text-purple-400" />
+              </div>
+
+            </div>
+          </li>
+          <li>
+            <div className=" item flex my-5">
+              <div className=" w-2/3 font-semibold">
+                Hercules Roadeo Lorem ipsum
               </div>
               <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
                 <AiFillMinusCircle className="cursor-pointer text-purple-400" />
@@ -294,7 +424,59 @@ const Navbar = () => {
           </li>
         </ol>
 
+        {/* subtotal and checkout button */}
+        <div className="bottom">
+          <div className="subtotal">
+            <span className="total">Subtotal:</span>
+            <span className="price">₹ 2000</span>
+          </div>
+          <button className="button">
+            <div className="default-btn flex items-center">
+              <svg
+                className="css-i6dzq1"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                fill="none"
+                strokeWidth="2"
+                stroke="#FFF"
+                height="20"
+                width="20"
+                viewBox="0 0 24 24"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle r="3" cy="12" cx="12"></circle>
+              </svg>
+              <span className="ml-2">Shop Now</span>
+            </div>
+            <div className="hover-btn flex items-center">
+              <svg
+                className="css-i6dzq1"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                fill="none"
+                strokeWidth="2"
+                stroke="#ffd300"
+                height="20"
+                width="20"
+                viewBox="0 0 24 24"
+              >
+                <circle r="1" cy="21" cx="9"></circle>
+                <circle r="1" cy="21" cx="20"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              <span className="ml-2">Checkout</span>
+            </div>
+          </button>
+        
+
+        <button class="btn"> Clear Cart
+        </button>
+        </div>
+
+        {/* <button className="checkout-btn">Checkout</button> */}
       </div>
+
+
     </>
   );
 };
