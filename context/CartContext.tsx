@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface CartItem {
@@ -18,27 +18,33 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<Record<string, CartItem>>({});
+  const [cart, setCart] = useState<Record<string, CartItem>>(
+    () => {
+      // Check if localStorage is available (client-side)
+      if (typeof window !== 'undefined') {
+        const cartData = localStorage.getItem('cart');
+        return cartData ? JSON.parse(cartData) : {};
+      } else {
+        // Return an empty cart for server-side rendering
+        return {};
+      }
+    }
+  );
+
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
-    // Load cart from localStorage on component mount
-    const cartData = localStorage.getItem('cart');
-    if (cartData) {
-      setCart(JSON.parse(cartData));
-    }
-  }, []);
-
-  useEffect(() => {
-    // Update localStorage whenever cart changes
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
     // Calculate subtotal whenever cart changes
     let total = 0;
     for (const item of Object.values(cart)) {
       total += item.qty * item.price;
     }
     setSubTotal(total);
+
+    // Update localStorage whenever cart changes (client-side only)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
   }, [cart]);
 
   const addToCart = (itemCode: string, price: number, qty: number, name: string) => {

@@ -7,7 +7,7 @@ import { useCart } from "../context/CartContext";
 
 
 const Navbar = () => {
-  const { cart, subTotal, addToCart, removeFromCart } = useCart(); // Changed
+  const { cart, subTotal, addToCart, removeFromCart, clearCart } = useCart(); // Changed
   const [activeLink, setActiveLink] = useState("");
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
@@ -306,12 +306,13 @@ const Navbar = () => {
                 <circle r="1" cy="21" cx="20"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
               </svg>
-              <span className="ml-2">Checkout</span>
+              <Link href={"/checkout"}> <span className="ml-2">Checkout</span>  </Link>
             </div>
           </button>
         
+        
 
-        <button className="btn"> Clear Cart
+        <button onClick={() => clearCart()} className="btn"> Clear Cart
         </button>
         </div>
 
