@@ -3,3 +3,14 @@
 @tailwind utilities;
 
 
+body {
+    position: absolute;
+    inset: 0;
+    z-index: -10;
+    height: 100%;
+    width: 100%;
+    background-color: #eae4ed; /* Adjust color as needed */
+    background-image: radial-gradient(#c0c4d9a1 1px, transparent 1px); /* Adjust the color here */
+    background-size: 16px 16px;
+  }
+  
