@@ -2,11 +2,11 @@ import connect from '../../../lib/db';
 import User from '../../../lib/models/user';
 import { NextResponse } from "next/server";
 
-export const config = {
-    api: {
-        bodyParser: true,
-    },
-};
+// export const config = {
+//     api: {
+//         bodyParser: true,
+//     },
+// };
 
 // export async function GET(request) {
 //     await connect();
