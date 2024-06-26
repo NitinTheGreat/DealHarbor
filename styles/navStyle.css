@@ -480,7 +480,7 @@ img {
 }
 /* Card sidebar */
 .sidebar {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   width: 25vh;
@@ -516,7 +516,7 @@ img {
 .bottom{
   height: 30vh;
   width: 100%;
-  position: absolute;
+  position: sticky;
   bottom: 0px;
   display: flex;
   justify-content: space-between;

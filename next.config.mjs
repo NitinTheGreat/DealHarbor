@@ -9,7 +9,7 @@ const nextConfig = {
     // Additional custom webpack configurations can be added here
     return config;
   },
-  // Other configurations can go here
+ 
 };
 
 export default nextConfig;
