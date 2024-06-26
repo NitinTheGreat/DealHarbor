@@ -61,6 +61,7 @@ button {
 body {
   background-color: var(--body-color);
   color: var(--text-color);
+  /* overflow-x: hidden; */
 }
 
 .nav {
@@ -480,7 +481,7 @@ img {
 }
 /* Card sidebar */
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: 25vh;
