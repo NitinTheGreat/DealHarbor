@@ -5,6 +5,8 @@ import { useCart } from '../../../context/CartContext'; // Adjust the path as ne
 import Image from 'next/image';
 import Preloader from '../../../components/Preloader'; 
 import styles from '../../../styles/Preloader.module.css'
+import { ToastContainer, toast } from 'react-toastify'; // Import toast
+import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
 const Product = ({ params }) => {
   const { addToCart } = useCart();
@@ -35,19 +37,21 @@ const Product = ({ params }) => {
       const name = product.name;
 
       addToCart(itemCode, price, qty, name);
+      toast.success('Item added to cart!'); // Show toast notification
     }
   };
 
   if (!product) {
     return (
       <div className={styles.body}>
-      <Preloader />
-    </div> // hello changed: Display Preloader while data is being fetched
+        <Preloader />
+      </div>
     );
   }
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
+      <ToastContainer /> {/* Toast container to display notifications */}
       <div className="container px-5 py-40 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full lg:h-auto h-64 relative rounded overflow-hidden">

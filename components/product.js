@@ -17,20 +17,20 @@ const ProductGrid = ({ products }) => {
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-wrap -m-4">
+        <div className="flex flex-wrap justify-center -m-4">
           {products.map((product) => (
             <div 
               key={product._id} 
-              className="lg:w-1/4 md:w-1/2 p-4"
+              className="p-4 w-full sm:w-1/2 lg:w-1/4"
               style={{ cursor: 'pointer' }} // Apply cursor pointer here
               onClick={() => handleProductClick(product.productId)}
             >
               <div className="w-full">
-                <div className="shadow-lg p-6 rounded-lg">
+                <div className="shadow-lg p-6 rounded-xl">
                   <a className="block relative h-48 rounded overflow-hidden">
                     <Image
                       alt="Product Image"
-                      className="object-cover object-center w-full h-full block"
+                      className="object-cover object-center w-full h-full rounded-3xl" // Rounded corners added here
                       src={product.image}
                       layout="fill"
                       objectFit="contain"
