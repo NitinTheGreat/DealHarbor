@@ -33,7 +33,7 @@ const ProductGrid = ({ products }) => {
                       className="object-cover object-center w-full h-full block"
                       src={product.image}
                       layout="fill"
-                      objectFit="cover"
+                      objectFit="contain"
                       sizes="100vw"
                     />
                   </a>
