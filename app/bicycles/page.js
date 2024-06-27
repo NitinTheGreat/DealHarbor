@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // Import Axios
-
+import axios from 'axios';
 import ProductGrid from '../../components/product';
 
 const BicyclesPage = () => {
@@ -11,14 +10,12 @@ const BicyclesPage = () => {
   useEffect(() => {
     const fetchBicycles = async () => {
       try {
-        const response = await axios.get('/api/bicycles'); // Use axios.get for GET requests
-        console.log(response);
-        
-        if (!response || response.status !== 200) {
+        const response = await axios.get('/api/bicycles');
+        if (response.status === 200) {
+          setProducts(response.data);
+        } else {
           throw new Error('Failed to fetch bicycles');
         }
-        
-        setProducts(response.data); // Use response.data to get the JSON data
       } catch (error) {
         console.error('Error fetching bicycles:', error);
       }

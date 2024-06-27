@@ -9,7 +9,7 @@ interface CartItem {
 
 interface CartContextType {
   cart: Record<string, CartItem>;
-  subTotal: number;
+  subTotal: number; // changed
   addToCart: (itemCode: string, price: number, qty: number, name: string) => void;
   removeFromCart: (itemCode: string, qty: number) => void;
   clearCart: () => void;
@@ -31,7 +31,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   );
 
-  const [subTotal, setSubTotal] = useState(0);
+  const [subTotal, setSubTotal] = useState(0); // changed
 
   useEffect(() => {
     // Calculate subtotal whenever cart changes
@@ -39,7 +39,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     for (const item of Object.values(cart)) {
       total += item.qty * item.price;
     }
-    setSubTotal(total);
+    const roundedTotal = parseFloat(total.toFixed(2)); // changed
+    setSubTotal(roundedTotal);
 
     // Update localStorage whenever cart changes (client-side only)
     if (typeof window !== 'undefined') {

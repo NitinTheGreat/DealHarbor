@@ -3,7 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['assets.aceternity.com', 'dummyimage.com','example.com','images.theconversation.com'], // Add your image hosting domains here
+    domains: ['assets.aceternity.com', 'dummyimage.com','example.com','images.theconversation.com','example.%20com','m.media-amazon.com'], // Add your image hosting domains here
   },
   webpack(config) {
     // Additional custom webpack configurations can be added here
