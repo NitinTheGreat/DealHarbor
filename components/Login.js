@@ -3,19 +3,28 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import "../styles/navStyle.css";
-import { Router } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
+  };
+
+  // Changed: Define hideLogin function outside of useEffect for reuse
+  const hideLogin = () => {
+    const login = document.getElementById("login");
+    if (login) {
+      login.classList.remove("show-login");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -44,15 +53,22 @@ const Login = () => {
           draggable: true,
           style: { width: "auto", whiteSpace: "nowrap" }
         });
+
+        // Changed: Hide login modal on successful login
+        setTimeout(() => {
+          hideLogin();
+        }, 2000);
         
+        // Clear form data
+        setFormData({
+          email: '',
+          password: '',
+        });
 
         // Redirect to dashboard or another page
-        // Router.push('/');
-        
-       
+        router.push('/');
       } else {
         const errorData = await response.json();
-     
         toast.error(errorData.message, {
           position: "top-right",
           autoClose: 3000,
@@ -78,10 +94,7 @@ const Login = () => {
       login.classList.add("show-login");
     };
 
-    const hideLogin = () => {
-      login.classList.remove("show-login");
-    };
-
+    // Changed: Move hideLogin function definition outside of useEffect
     if (loginBtn) {
       loginBtn.addEventListener("click", showLogin);
     }
@@ -134,9 +147,6 @@ const Login = () => {
             />
           </div>
         </div>
-        {/* {errorMessage && (
-          <div className="login__error">{errorMessage}</div>
-        ) } */}
         {
           errorMessage ? <div className="login__error">{errorMessage}</div> : null
         }
