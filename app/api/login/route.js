@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import connect from '../../../lib/db';
 import User from '../../../lib/models/user';
+import CryptoJS from 'crypto-js';
 
 export async function POST(request) {
   await connect();
@@ -13,8 +14,12 @@ export async function POST(request) {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      // User found, now validate password (plaintext comparison)
-      if (password === existingUser.password) {
+      // Decrypt the stored password
+      const decryptedPasswordBytes = CryptoJS.AES.decrypt(existingUser.password, process.env.SECRET_KEY);
+      const decryptedPassword = decryptedPasswordBytes.toString(CryptoJS.enc.Utf8);
+
+      // Validate the provided password with the decrypted password
+      if (password === decryptedPassword) {
         return NextResponse.json({ message: "Login successful" }, { status: 200 });
       } else {
         return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
@@ -23,7 +28,6 @@ export async function POST(request) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
   } catch (error) {
-    // console.error('Signup error:', error);
     return NextResponse.json({ message: "Error", error: error.message }, { status: 500 });
   }
 }
