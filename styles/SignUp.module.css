@@ -1,0 +1,53 @@
+/* components/SignUp.module.css */
+.signupContainer {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+ 
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .inputGroup {
+    margin-bottom: 15px;
+  }
+  
+
+  .passwordStrength {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .passwordMatch {
+    color: red;
+    font-size: 0.9em;
+  }
+  
+  .signupButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .signupButton:hover {
+    background-color: #218838;
+  }
+  
+  .toggleAuth {
+    color: blue;
+    cursor: pointer;
+  }
+  
