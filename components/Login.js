@@ -1,9 +1,74 @@
-'use client';
-import React, { useEffect } from 'react';
+// pages/Login.js
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import "../styles/navStyle.css";
-
+import { Router } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Form data:', formData);
+    console.log("JSON form data", JSON.stringify(formData));
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Login successful:', data.message);
+        toast.success('Login Successful', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          style: { width: "auto", whiteSpace: "nowrap" }
+        });
+        
+
+        // Redirect to dashboard or another page
+        // Router.push('/');
+        
+       
+      } else {
+        const errorData = await response.json();
+     
+        toast.error(errorData.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          style: { width: "auto", whiteSpace: "nowrap" }
+        });
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setErrorMessage('Error logging in. Please try again.'); // Generic error message
+    }
+  };
+
   useEffect(() => {
     const login = document.getElementById("login");
     const loginBtn = document.getElementById("login-btn");
@@ -38,7 +103,8 @@ const Login = () => {
 
   return (
     <div className="login" id="login">
-      <form action="" className="login__form">
+       <ToastContainer /> 
+      <form onSubmit={handleSubmit} className="login__form">
         <h2 className="login__title">Log In</h2>
         <div className="login__group">
           <div>
@@ -50,6 +116,8 @@ const Login = () => {
               placeholder="Write your email"
               id="email"
               className="login__input"
+              value={formData.email}
+              onChange={handleInputChange}
             />
           </div>
           <div>
@@ -61,20 +129,29 @@ const Login = () => {
               placeholder="Enter your password"
               id="password"
               className="login__input"
+              value={formData.password}
+              onChange={handleInputChange}
             />
           </div>
         </div>
+        {/* {errorMessage && (
+          <div className="login__error">{errorMessage}</div>
+        ) } */}
+        {
+          errorMessage ? <div className="login__error">{errorMessage}</div> : null
+        }
+        
         <div>
           <p className="login__signup">
             You do not have an account?{' '}
-            <a href="/Signup" >
+            <Link href="/Signup">
               Sign up
-            </a>
+            </Link>
           </p>
-          <Link href="/Signup" className="login__forgot">
-            You forgot your password
+          <Link href="/ForgotPassword" className="login__forgot">
+            Forgot your password?
           </Link>
-          <button type="submit" className="login__button">
+          <button type="submit" className="login__button" id="login-btn">
             Log In
           </button>
         </div>

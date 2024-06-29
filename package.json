@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.11",
     "gsap": "^3.12.5",
