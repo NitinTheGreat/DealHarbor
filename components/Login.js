@@ -154,7 +154,7 @@ const Login = () => {
         <div>
           <p className="login__signup">
             You do not have an account?{' '}
-            <Link href="/Signup">
+            <Link href="/Signup" onClick={hideLogin}>
               Sign up
             </Link>
           </p>
