@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import connect from '../../../lib/db';
 import User from '../../../lib/models/user';
 import CryptoJS from 'crypto-js';
+import jwt from 'jsonwebtoken';
 
 export async function POST(request) {
   await connect();
@@ -20,7 +21,11 @@ export async function POST(request) {
 
       // Validate the provided password with the decrypted password
       if (password === decryptedPassword) {
-        return NextResponse.json({ message: "Login successful" }, { status: 200 });
+        // Create a JWT token
+        const token = jwt.sign({ userId: existingUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        console.log('Token:', token);
+
+        return NextResponse.json({ message: "Login successful", token }, { status: 200 });
       } else {
         return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
       }

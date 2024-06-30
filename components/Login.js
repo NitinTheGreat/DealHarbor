@@ -1,10 +1,11 @@
 // pages/Login.js
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Corrected import
 import "../styles/navStyle.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -29,8 +30,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form data:', formData);
-    console.log("JSON form data", JSON.stringify(formData));
 
     try {
       const response = await fetch('/api/login', {
@@ -44,6 +43,10 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful:', data.message);
+
+        // Store the token in local storage
+        localStorage.setItem('token', data.token);
+
         toast.success('Login Successful', {
           position: "top-right",
           autoClose: 3000,
@@ -58,7 +61,7 @@ const Login = () => {
         setTimeout(() => {
           hideLogin();
         }, 2000);
-        
+
         // Clear form data
         setFormData({
           email: '',
@@ -115,8 +118,10 @@ const Login = () => {
   }, []);
 
   return (
+    <>
+    <ToastContainer />
     <div className="login" id="login">
-       <ToastContainer /> 
+      
       <form onSubmit={handleSubmit} className="login__form">
         <h2 className="login__title">Log In</h2>
         <div className="login__group">
@@ -150,7 +155,7 @@ const Login = () => {
         {
           errorMessage ? <div className="login__error">{errorMessage}</div> : null
         }
-        
+
         <div>
           <p className="login__signup">
             You do not have an account?{' '}
@@ -168,6 +173,7 @@ const Login = () => {
       </form>
       <i className="ri-close-line login__close" id="login-close" />
     </div>
+    </>
   );
 };
 

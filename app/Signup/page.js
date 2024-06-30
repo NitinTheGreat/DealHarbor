@@ -1,5 +1,8 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +16,8 @@ const SignUpForm = () => {
   const [passwordMatch, setPasswordMatch] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const [formMessage, setFormMessage] = useState(null); // State for form submission messages
+
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -52,7 +57,7 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch('/api/signUp', {
         method: 'POST',
@@ -61,13 +66,44 @@ const SignUpForm = () => {
         },
         body: JSON.stringify(formData),
       });
-
+  
       const responseData = await response.json();
-
+  
       if (response.ok) {
         setFormMessage({ type: 'success', text: responseData.message });
-        // Optionally, you can redirect the user to another page or perform other actions upon successful signup
-      } else {
+        // Clear form data upon successful submission
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        });
+        toast.success('Kindly Login to Continue', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          style: { width: "auto", whiteSpace: "nowrap" }
+        });
+        setTimeout(() => {
+          router.push('/');
+        }, 3000);
+        
+
+      }
+      
+      else {
+        toast.error(errorData.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          style: { width: "auto", whiteSpace: "nowrap" }
+        });
         setFormMessage({ type: 'error', text: responseData.message });
       }
     } catch (error) {
@@ -75,6 +111,7 @@ const SignUpForm = () => {
       setFormMessage({ type: 'error', text: 'An error occurred. Please try again later.' });
     }
   };
+  
 
   const isFormValid = () => {
     return emailValid && passwordMatch && formData.password.length >= 8;
@@ -82,6 +119,7 @@ const SignUpForm = () => {
 
   return (
     <div className="flex items-center justify-center h-full bg-gradient-to-b from-gray-100 via-gray-200 to-transparent mt-20">
+       <ToastContainer /> 
       <div className="w-full md:w-3/4 lg:w-1/2 xl:w-1/3 bg-white p-8 rounded-lg shadow-lg">
         <h3 className="mb-6 text-2xl text-center text-gray-800">Create an Account!</h3>
         <form className="px-4 py-6 bg-white rounded" onSubmit={handleSubmit}>
