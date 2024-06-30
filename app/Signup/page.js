@@ -90,12 +90,10 @@ const SignUpForm = () => {
         setTimeout(() => {
           router.push('/');
         }, 3000);
-        
-
-      }
-      
-      else {
-        toast.error(errorData.message, {
+      } else {
+        // Handle error response
+        setFormMessage({ type: 'error', text: responseData.message });
+        toast.error(responseData.message, {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: true,
@@ -104,13 +102,13 @@ const SignUpForm = () => {
           draggable: true,
           style: { width: "auto", whiteSpace: "nowrap" }
         });
-        setFormMessage({ type: 'error', text: responseData.message });
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       setFormMessage({ type: 'error', text: 'An error occurred. Please try again later.' });
     }
   };
+  
   
 
   const isFormValid = () => {

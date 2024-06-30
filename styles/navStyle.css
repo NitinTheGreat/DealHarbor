@@ -74,13 +74,35 @@ button {
   border: none;
   outline: none;
 }
+.logoboth{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
 
+}
 .nav__logo {
   margin-left: 2px;
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+  gap: 1px;
+  
+}
+.logo img{
+  position: absolute;
+  left: 0;
+ 
+}
+.logo h1{
+  position: relative;
+  left: 90px;
 }
 
 .nav__logo img {
+  
   width: 100px;
+ 
 }
 
 ul {
@@ -168,6 +190,9 @@ img {
   color: var(--title-color);
   font-weight: var(--font-semi-bold);
   transition: color 0.4s;
+  display: flex;
+  align-items: center;
+
 }
 
 .nav__actions {
@@ -247,6 +272,10 @@ img {
   .logo h1{
     font-family: 'Calligraffitti', cursive;
     font-size: 1rem;
+   
+      position: relative;
+      left: 50px;
+    
   
   }
  
@@ -403,6 +432,10 @@ img {
   .logo h1{
     font-family: 'Calligraffitti', cursive;
     font-size: 0.8rem;
+    
+      position: relative;
+      left: 40px;
+    
   
   }
   
@@ -477,6 +510,15 @@ img {
 @media screen and (min-width: 1150px) {
   .container {
     margin-inline: auto;
+  }
+  .logo img{
+    position: absolute;
+    left: 0;
+    width: 100px;
+  }
+  .logo h1{
+    position: relative;
+    left: 90px;
   }
 }
 /* Card sidebar */

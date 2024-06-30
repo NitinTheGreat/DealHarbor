@@ -89,12 +89,14 @@ const Navbar = () => {
 
       <header className="header" id="header">
         <nav className="nav container">
+          <div className="logoboth">
           <Link href="/" className="nav__logo">
             <div className="logo">
               <img src="../images/logo.png" alt="logo" />
               <h1>Deal Harbor</h1>
             </div>
           </Link>
+          </div>
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
               <li className="nav__item">
