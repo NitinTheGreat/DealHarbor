@@ -42,6 +42,26 @@ const Navbar = () => {
       navClose.addEventListener("click", hideMenu);
     }
 
+    const search = document.getElementById("search");
+    const searchBtn = document.getElementById("search-btn");
+    const searchClose = document.getElementById("search-close");
+
+    const showSearch = () => {
+      search.classList.add("show-search");
+    };
+
+    const hideSearch = () => {
+      search.classList.remove("show-search");
+    };
+
+    if (searchBtn) {
+      searchBtn.addEventListener("click", showSearch);
+    }
+
+    if (searchClose) {
+      searchClose.addEventListener("click", hideSearch);
+    }
+
     // Cleanup event listeners on unmount
     return () => {
       if (navToggle) {
@@ -49,6 +69,12 @@ const Navbar = () => {
       }
       if (navClose) {
         navClose.removeEventListener("click", hideMenu);
+      }
+      if (searchBtn) {
+        searchBtn.removeEventListener("click", showSearch);
+      }
+      if (searchClose) {
+        searchClose.removeEventListener("click", hideSearch);
       }
     };
   }, []);
