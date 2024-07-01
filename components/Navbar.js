@@ -13,10 +13,15 @@ const Navbar = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [username, setUsername] = useState(""); // State to hold username
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const storedUsername = localStorage.getItem('username');
     setIsLoggedIn(!!token); // Update isLoggedIn based on token presence
+    setUsername(storedUsername || ''); // Set username from localStorage if available
+
     const navMenu = document.getElementById("nav-menu");
     const navToggle = document.getElementById("nav-toggle");
     const navClose = document.getElementById("nav-close");
@@ -37,26 +42,6 @@ const Navbar = () => {
       navClose.addEventListener("click", hideMenu);
     }
 
-    const search = document.getElementById("search");
-    const searchBtn = document.getElementById("search-btn");
-    const searchClose = document.getElementById("search-close");
-
-    const showSearch = () => {
-      search.classList.add("show-search");
-    };
-
-    const hideSearch = () => {
-      search.classList.remove("show-search");
-    };
-
-    if (searchBtn) {
-      searchBtn.addEventListener("click", showSearch);
-    }
-
-    if (searchClose) {
-      searchClose.addEventListener("click", hideSearch);
-    }
-
     // Cleanup event listeners on unmount
     return () => {
       if (navToggle) {
@@ -64,12 +49,6 @@ const Navbar = () => {
       }
       if (navClose) {
         navClose.removeEventListener("click", hideMenu);
-      }
-      if (searchBtn) {
-        searchBtn.removeEventListener("click", showSearch);
-      }
-      if (searchClose) {
-        searchClose.removeEventListener("click", hideSearch);
       }
     };
   }, []);
@@ -84,11 +63,17 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     setIsLoggedIn(false);
+    setUsername('');
   };
 
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
+  };
+
+  const toggleSearch = () => {
+    setIsSearchVisible(!isSearchVisible);
   };
 
   return (
@@ -158,13 +143,13 @@ const Navbar = () => {
             </div>
           </div>
           <div className="nav__actions">
-            <i className="ri-search-line nav__search" id="search-btn" />
+            <i className="ri-search-line nav__search" id="search-btn" onClick={toggleSearch} />
             {isLoggedIn ? (
               <div className="nav__dropdown" onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
                 <span className="nav__user-icon ri-user-line" />
                 {showDropdown && (
                   <ul className="nav__dropdown-menu">
-                    <li className="nav__dropdown-item"><span>Welcome, User</span></li>
+                    <li className="nav__dropdown-item"><span>Welcome, {username}</span></li>
                     <li className="nav__dropdown-item"><Link href="/orders"><span>Your Orders</span></Link></li>
                     <li className="nav__dropdown-item"><Link href="/sellings"><span>Your Sellings</span></Link></li>
                     <li className="nav__dropdown-item" onClick={handleLogout}><span>Logout</span></li>
@@ -185,7 +170,9 @@ const Navbar = () => {
           </div>
         </nav>
       </header>
-      <div className="search" id="search">
+
+      {/* Search Section */}
+      <div className={`search ${isSearchVisible ? "show-search" : ""}`} id="search">
         <form action="" className="search__form">
           <i className="ri-search-line search__icon" />
           <input
@@ -194,13 +181,12 @@ const Navbar = () => {
             className="search__input"
           />
         </form>
-        <i className="ri-close-line search__close" id="search-close" />
+        <i className="ri-close-line search__close" id="search-close" onClick={toggleSearch} />
       </div>
 
-      {/* card sidebar */}
+      {/* Card Sidebar */}
       <div
-        className={`sidebar ${isSidebarVisible ? "show" : ""
-          }`}
+        className={`sidebar ${isSidebarVisible ? "show" : ""}`}
       >
         <h2 className="font-bold text-xl p-4">Your Cart</h2>
         <span
@@ -210,19 +196,19 @@ const Navbar = () => {
           <i className="ri-close-line" />
         </span>
 
-        <ol className=" list-decimal font-semibold pl-8">
+        <ol className="list-decimal font-semibold pl-8">
           {Object.keys(cart).map((itemCode) => {
             const item = cart[itemCode];
             return (
               <li key={itemCode}>
-                <div className=" item flex my-5">
-                  <div className=" w-2/3 font-semibold">
+                <div className="item flex my-5">
+                  <div className="w-2/3 font-semibold">
                     {item.name}
                   </div>
-                  <div className=" flex font-semibold items-center justify-center w-1/3 text-lg">
+                  <div className="flex font-semibold items-center justify-center w-1/3 text-lg">
                     <AiFillMinusCircle className="cursor-pointer text-purple-400"
                       onClick={() => removeFromCart(itemCode, 1)} />
-                    <span className=" mx-2 text-sm">{item.qty}</span>
+                    <span className="mx-2 text-sm">{item.qty}</span>
                     <AiFillPlusCircle className="cursor-pointer text-purple-400"
                       onClick={() => addToCart(itemCode, item.price, 1, item.name)} />
                   </div>
@@ -271,12 +257,11 @@ const Navbar = () => {
                 <circle r="1" cy="21" cx="20"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
               </svg>
-              <Link href={"/checkout"}> <span className="ml-2">Checkout</span>  </Link>
+              <Link href="/checkout"><span className="ml-2">Checkout</span></Link>
             </div>
           </button>
 
-          <button onClick={() => clearCart()} className="btn"> Clear Cart
-          </button>
+          <button onClick={() => clearCart()} className="btn">Clear Cart</button>
         </div>
       </div>
     </>

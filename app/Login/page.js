@@ -20,7 +20,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch('/api/login', {
         method: 'POST',
@@ -29,14 +29,15 @@ const Login = () => {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful:', data.message);
-
-        // Store the token in local storage
+        
+        // Store the token and username in local storage
         localStorage.setItem('token', data.token);
-
+        localStorage.setItem('username', data.name); // Assuming the backend sends 'name' in the response
+  
         toast.success('Login Successful', {
           position: "top-right",
           autoClose: 3000,
@@ -46,15 +47,15 @@ const Login = () => {
           draggable: true,
           style: { width: "auto", whiteSpace: "nowrap" }
         });
-
+  
         // Clear form data
         setFormData({
           email: '',
           password: '',
         });
-
+  
         setTimeout(() => {
-            router.push('/');
+          router.push('/');
         }, 3000);
         
       } else {
@@ -74,6 +75,7 @@ const Login = () => {
       setErrorMessage('Error logging in. Please try again.'); // Generic error message
     }
   };
+  
 
   useEffect(() => {
     const loginClose = document.getElementById("login-close");

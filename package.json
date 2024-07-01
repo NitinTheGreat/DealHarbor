@@ -17,6 +17,7 @@
     "framer-motion": "^11.2.11",
     "gsap": "^3.12.5",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "mongoose": "^8.4.4",
     "next": "14.2.4",
     "react": "^18",
