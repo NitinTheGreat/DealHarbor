@@ -88,7 +88,7 @@ const SignUpForm = () => {
           style: { width: "auto", whiteSpace: "nowrap" }
         });
         setTimeout(() => {
-          router.push('/');
+          router.push('/Login');
         }, 3000);
       } else {
         // Handle error response
@@ -102,6 +102,9 @@ const SignUpForm = () => {
           draggable: true,
           style: { width: "auto", whiteSpace: "nowrap" }
         });
+        setTimeout(() => {
+          router.push('/Login');
+        }, 3000);
       }
     } catch (error) {
       console.error('Error submitting form:', error);

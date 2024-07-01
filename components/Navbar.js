@@ -6,14 +6,17 @@ import Link from "next/link";
 import "../styles/navStyle.css";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
 import { useCart } from "../context/CartContext";
-import Login from "./Login"; // Import the Login component
 
 const Navbar = () => {
   const { cart, subTotal, addToCart, removeFromCart, clearCart } = useCart();
   const [activeLink, setActiveLink] = useState("");
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token); // Update isLoggedIn based on token presence
     const navMenu = document.getElementById("nav-menu");
     const navToggle = document.getElementById("nav-toggle");
     const navClose = document.getElementById("nav-close");
@@ -74,8 +77,18 @@ const Navbar = () => {
   const handleSetActiveLink = (link) => {
     setActiveLink(link);
   };
+
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  };
+
+  const handleDropdownToggle = () => {
+    setShowDropdown(!showDropdown);
   };
 
   return (
@@ -90,12 +103,12 @@ const Navbar = () => {
       <header className="header" id="header">
         <nav className="nav container">
           <div className="logoboth">
-          <Link href="/" className="nav__logo">
-            <div className="logo">
-              <img src="../images/logo.png" alt="logo" />
-              <h1>Deal Harbor</h1>
-            </div>
-          </Link>
+            <Link href="/" className="nav__logo">
+              <div className="logo">
+                <img src="../images/logo.png" alt="logo" />
+                <h1>Deal Harbor</h1>
+              </div>
+            </Link>
           </div>
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
@@ -146,7 +159,24 @@ const Navbar = () => {
           </div>
           <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" />
-            <i className="ri-user-line nav__login" id="login-btn" />
+            {isLoggedIn ? (
+              <div className="nav__dropdown" onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
+                <span className="nav__user-icon ri-user-line" />
+                {showDropdown && (
+                  <ul className="nav__dropdown-menu">
+                    <li className="nav__dropdown-item"><span>Welcome, User</span></li>
+                    <li className="nav__dropdown-item"><Link href="/orders"><span>Your Orders</span></Link></li>
+                    <li className="nav__dropdown-item"><Link href="/sellings"><span>Your Sellings</span></Link></li>
+                    <li className="nav__dropdown-item" onClick={handleLogout}><span>Logout</span></li>
+                  </ul>
+                )}
+              </div>
+            ) : (
+              <Link href="/Login" className="nav__login">
+                <span>Login</span>
+              </Link>
+            )}
+
             <i className="ri-shopping-cart-line nav__cart" id="Cart" onClick={toggleSidebar} />
 
             <div className="nav__toggle" id="nav-toggle">
@@ -181,7 +211,7 @@ const Navbar = () => {
         </span>
 
         <ol className=" list-decimal font-semibold pl-8">
-          {Object.keys(cart).map((itemCode) => { 
+          {Object.keys(cart).map((itemCode) => {
             const item = cart[itemCode];
             return (
               <li key={itemCode}>
@@ -207,7 +237,7 @@ const Navbar = () => {
             <span className="total">Subtotal:</span>
             <span className="price">₹{subTotal}</span>
           </div>
-          <button className="button">
+          <button className="button button-cart">
             <div className="default-btn flex items-center">
               <svg
                 className="css-i6dzq1"
@@ -244,17 +274,11 @@ const Navbar = () => {
               <Link href={"/checkout"}> <span className="ml-2">Checkout</span>  </Link>
             </div>
           </button>
-        
-        
 
-        <button onClick={() => clearCart()} className="btn"> Clear Cart
-        </button>
+          <button onClick={() => clearCart()} className="btn"> Clear Cart
+          </button>
         </div>
-
       </div>
-
-      {/* Render the Login component */}
-      <Login />
     </>
   );
 };

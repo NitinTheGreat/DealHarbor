@@ -592,7 +592,7 @@ img {
   font-weight: bolder;
   margin-bottom: 5vh;
 } */
-button {
+.button-cart {
   position: relative;
   overflow: hidden;
   outline: none;
@@ -793,3 +793,72 @@ button:hover .hover-btn {
   cursor: pointer;
 }
 /* sign up ends */
+
+/* Updated CSS for Navbar Dropdown */
+
+.nav__dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav__dropdown:hover .nav__dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav__user-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  color: #333;
+}
+
+.nav__dropdown-menu {
+  
+  position: absolute;
+  top: 2rem; /* Adjust this value as needed */
+  right:10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 10;
+  width: 20vw;
+}
+@media screen and (max-width: 700px) {
+  .nav__dropdown-menu {
+    width: 40vw;
+  }
+}
+
+.nav__dropdown-item {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav__dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Keep dropdown visible for a short duration after hover */
+.nav__dropdown:hover .nav__dropdown-menu,
+.nav__dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav__dropdown-menu {
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 2s;
+}
