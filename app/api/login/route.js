@@ -26,8 +26,8 @@ export async function POST(request) {
         const token = jwt.sign({ userId: existingUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         console.log('Token:', token);
 
-        // Return response with token and user's name
-        return NextResponse.json({ message: "Login successful", token, name: existingUser.name }, { status: 200 });
+        // Return response with token, user's name, and email
+        return NextResponse.json({ message: "Login successful", token, name: existingUser.name, email: existingUser.email }, { status: 200 });
       } else {
         return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
       }
