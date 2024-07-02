@@ -1,11 +1,9 @@
-// pages/bicycles/index.js
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ProductGrid from '../../components/product';
-import BikeLoader from '../../components/bicyclePreloader'
+import ProductGrid from '../../components/product'; // Make sure the path is correct
+import Preloader from '../../components/Preloader';
 
 const BicyclesPage = () => {
   const [products, setProducts] = useState([]);
@@ -34,7 +32,7 @@ const BicyclesPage = () => {
     <div>
       <h1>Bicycles</h1>
       {loading ? (
-        <BikeLoader /> // Show the loader while fetching data
+        <Preloader/>// Show the loader while fetching data
       ) : (
         <ProductGrid products={products} /> // Show product grid when data is fetched
       )}

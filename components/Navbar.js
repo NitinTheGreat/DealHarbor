@@ -175,7 +175,7 @@ const Navbar = () => {
                 <span className="nav__user-icon ri-user-line" />
                 {showDropdown && (
                   <ul className="nav__dropdown-menu">
-                    <li className="nav__dropdown-item"><span>Welcome, {username}</span></li>
+                    <li className="nav__dropdown-item"><span>Welcome <span id="username">{username}</span></span></li>
                     <li className="nav__dropdown-item"><Link href="/orders"><span>Your Orders</span></Link></li>
                     <li className="nav__dropdown-item"><Link href="/sellings"><span>Your Sellings</span></Link></li>
                     <li className="nav__dropdown-item" onClick={handleLogout}><span>Logout</span></li>

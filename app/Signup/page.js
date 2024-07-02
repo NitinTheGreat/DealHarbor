@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +18,14 @@ const SignUpForm = () => {
   const [formMessage, setFormMessage] = useState(null); // State for form submission messages
 
   const router = useRouter();
+  
+ useEffect(() => {
+   if(localStorage.getItem('token')){
+    router.push('/')
+   }
+ 
+   
+ }, [])
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;

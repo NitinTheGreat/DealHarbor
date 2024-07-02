@@ -1,20 +1,27 @@
-// components/Loader.js
-
-import React from 'react';
-import styles from '../styles/Preloader.module.css'; // Assuming you use a CSS module
+'use client';
+import React, { useState, useEffect } from 'react';
+import styles from '../styles/Preloader.module.css'; // Ensure the path is correct
 
 const Preloader = () => {
-  return (
+  const [progress, setProgress] = useState(0);
 
-    <div className={styles.loader}>
-      <span></span>
-      <div id="dot-1" className={styles.dot}></div>
-      <div id="dot-2" className={styles.dot}></div>
-      <div id="dot-3" className={styles.dot}></div>
-      <div id="dot-4" className={styles.dot}></div>
-      <div id="dot-5" className={styles.dot}></div>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+    }, 600);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className={styles.loadingContainer}>
+      <div className={styles.loadingBar} style={{ width: `${progress}%` }} />
+      <div className={styles.loadingContent}>
+        <div className={styles.loadingSpinner}></div>
+        <div className={styles.loadingText}>Loading...</div>
+      </div>
     </div>
-  
   );
 };
 

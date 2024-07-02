@@ -6,12 +6,23 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+
+const router = useRouter();
+ useEffect(() => {
+   if(localStorage.getItem('token')){
+    router.push('/')
+   }
+ 
+   
+ }, [])
+ 
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
+ 
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -56,7 +67,7 @@ const Login = () => {
   
         setTimeout(() => {
           router.push('/');
-        }, 3000);
+        }, 2000);
         
       } else {
         const errorData = await response.json();
