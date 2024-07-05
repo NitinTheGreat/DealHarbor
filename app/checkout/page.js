@@ -37,6 +37,7 @@ const Checkout = () => {
         subTotal
       });
       localStorage.removeItem('cartProducts');
+      localStorage.removeItem('cart')
       router.push('/orders');
     } catch (error) {
       console.error('Error creating order:', error);
