@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const userEmail = localStorage.getItem('email');
+  const userEmail = typeof window !== 'undefined' ? localStorage.getItem('email') : '';
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -35,8 +35,8 @@ const Orders = () => {
         <p>No orders found.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200">
-            <thead>
+          <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+            <thead className="bg-gray-100">
               <tr>
                 <th className="py-2 px-4 border-b">Date Ordered</th>
                 <th className="py-2 px-4 border-b">Item</th>
@@ -51,12 +51,12 @@ const Orders = () => {
               {orders.map((order) => (
                 <React.Fragment key={order._id}>
                   {order.items.map((item, index) => (
-                    <tr key={index} className="border-t">
+                    <tr key={index} className="border-t hover:bg-gray-50 transition duration-150">
                       <td className="py-2 px-4 border-b">{new Date(order.dateOrdered).toLocaleDateString()}</td>
                       <td className="py-2 px-4 border-b">{item.name}</td>
-                      <td className="py-2 px-4 border-b text-center">{item.quantity}</td>
+                      <td className="py-2 px-4 border-b text-center">{item.qty}</td>
                       <td className="py-2 px-4 border-b text-right">₹{item.price}</td>
-                      <td className="py-2 px-4 border-b text-right">₹{item.total}</td>
+                      <td className="py-2 px-4 border-b text-right">₹{item.price * item.qty}</td>
                       <td className="py-2 px-4 border-b">{item.sellerEmail}</td>
                       <td className="py-2 px-4 border-b">{item.sellerPhone}</td>
                     </tr>
