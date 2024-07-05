@@ -1,10 +1,9 @@
 'use client';
-
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../../../context/CartContext'; // Adjust the path as necessary
 import Image from 'next/image';
-import Preloader from '../../../components/Preloader'; 
-import styles from '../../../styles/Preloader.module.css'
+import Preloader from '../../../components/Preloader';
+import styles from '../../../styles/Preloader.module.css';
 import { ToastContainer, toast } from 'react-toastify'; // Import toast
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
@@ -33,16 +32,52 @@ const Product = ({ params }) => {
     if (product) {
       const itemCode = params.slug;
       const price = product.price;
-      const qty = 1; // Default quantity
       const name = product.name;
-
-      addToCart(itemCode, price, qty, name);
-      toast.success('Item added to cart!'); // Show toast notification
+      const productId = product.productId;
+      const sellerName = product.sellerName;
+      const sellerEmail = product.sellerEmail;
+      const sellerPhone = product.sellerPhone;
+  
+      // Retrieve cart items from localStorage
+      const storedProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
+  
+      // Check if the product already exists in cart
+      const existingProductIndex = storedProducts.findIndex(item => item.itemCode === itemCode);
+  
+      if (existingProductIndex !== -1) {
+        // Product already exists, increase quantity by 1
+        storedProducts[existingProductIndex].qty += 1;
+      } else {
+        // Product doesn't exist, add it to cart with quantity 1
+        storedProducts.push({
+          itemCode,
+          price,
+          qty: 1,
+          name,
+          productId,
+          sellerName,
+          sellerEmail,
+          sellerPhone,
+        });
+      }
+  
+      // Update localStorage with modified cart items
+      localStorage.setItem('cartProducts', JSON.stringify(storedProducts));
+  
+      // Call addToCart function from context to update cart state
+      addToCart(itemCode, price, 1, name);
+  
+      // Show toast notification
+      toast.success('Item added to cart!');
     }
   };
+  
+  
+
   // Using string methods
-const indexOfUnderscore = params.slug.indexOf("_");
-const Sellername = indexOfUnderscore !== -1 ? params.slug.substring(0, indexOfUnderscore) : params.slug;
+  const indexOfUnderscore = params.slug.indexOf('_');
+  const Sellername =
+    indexOfUnderscore !== -1 ? params.slug.substring(0, indexOfUnderscore) : params.slug;
 
   if (!product) {
     return (
@@ -58,27 +93,20 @@ const Sellername = indexOfUnderscore !== -1 ? params.slug.substring(0, indexOfUn
       <div className="container px-5 py-40 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full lg:h-auto h-64 relative rounded overflow-hidden">
-            <Image
-              alt="Product Image"
-              src={product.image}
-              layout="fill"
-              objectFit="contain"
-            />
+            <Image alt="Product Image" src={product.image} layout="fill" objectFit="contain" />
           </div>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">
               {/* By {params.slug} */}
               Seller Name : {Sellername}
             </h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-              {product.name}
-            </h1>
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.name}</h1>
             <div className="flex mb-4">
               <span className="flex items-center">
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}
-                    fill={i < product.rating ? "currentColor" : "none"}
+                    fill={i < product.rating ? 'currentColor' : 'none'}
                     stroke="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -129,9 +157,7 @@ const Sellername = indexOfUnderscore !== -1 ? params.slug.substring(0, indexOfUn
                 </a>
               </span>
             </div>
-            <p className="leading-relaxed">
-              {product.description}
-            </p>
+            <p className="leading-relaxed">{product.description}</p>
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
             <div className="flex items-center">
               <span className="title-font font-medium text-2xl text-gray-900">

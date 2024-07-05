@@ -14,12 +14,12 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [username, setUsername] = useState(""); // State to hold username
+  const [username, setUsername] = useState(""); 
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const storedUsername = localStorage.getItem('username');
-    setIsLoggedIn(!!token); // Update isLoggedIn based on token presence
+    setIsLoggedIn(true); // Update isLoggedIn based on token presence
     setUsername(storedUsername || ''); // Set username from localStorage if available
 
     const navMenu = document.getElementById("nav-menu");

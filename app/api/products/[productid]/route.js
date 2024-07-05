@@ -24,18 +24,31 @@ export async function GET(request, params) {
   
 
 
-export async function POST(request) {
+  export async function POST(request) {
     await connect();
   
     try {
-        const body = await request.json();
-        const { name, description, price, image, quantity, isAvailable, category, productId } = body;
+      const body = await request.json();
+      const { name, description, price, image, quantity, isAvailable, category, productId, sellerEmail, sellerPhone } = body;
   
-        const product = new Product({ name, description, price, image, quantity, isAvailable, category, productId });
-        await product.save();
+      const product = new Product({
+        name,
+        description,
+        price,
+        image,
+        quantity,
+        isAvailable,
+        category,
+        productId,
+        sellerEmail,
+        sellerPhone,
+      });
   
-        return NextResponse.json({ message: "Product created" }, { status: 201 });
+      await product.save();
+      // console.log('Product saved:', product);
+  
+      return NextResponse.json({ message: 'Product created', product }, { status: 201 });
     } catch (error) {
-        return NextResponse.json({ message: "Error creating product", error: error.message }, { status: 400 });
+      return NextResponse.json({ message: 'Error creating product', error: error.message }, { status: 400 });
     }
   }

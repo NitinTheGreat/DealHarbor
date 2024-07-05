@@ -10,10 +10,12 @@ const SellProductPage = () => {
     description: '',
     price: 0,
     image: '',
-    quantity: '',
+    quantity: '1',
     isAvailable: true,
     category: '',
     productId: '',
+    sellerEmail: '',
+    sellerPhone: '',
   });
 
   const router = useRouter();
@@ -51,21 +53,21 @@ const SellProductPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const { productId, ...productData } = formData;
-      const url = `/api/products/${productId}`;
-
+      const url = `/api/products/${formData.productId}`;
+      
       const res = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ productId, ...productData }),
+        body: JSON.stringify(formData), // Send formData directly in the request body
       });
-
+  
       if (res.ok) {
         toast.success('Product created successfully!');
+        const { productId } = formData;
         setTimeout(() => {
           router.push(`/product/${productId}`);
         }, 2000);
@@ -78,7 +80,9 @@ const SellProductPage = () => {
       console.error('Error creating product:', error);
     }
   };
-
+  
+  
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 mt-16">
       <h1 className="text-3xl font-bold mt-8 mb-4 text-center">Sell a Product</h1>
@@ -150,16 +154,18 @@ const SellProductPage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="quantity" className="block text-gray-700 font-bold mb-2">Quantity:</label>
-          <input
-            type="number"
+          <select
             id="quantity"
             name="quantity"
             value={formData.quantity}
             onChange={handleChange}
             className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 shadow-lg hover:shadow-xl"
-            placeholder="Enter product quantity"
             required
-          />
+          >
+            {[...Array(10).keys()].map(i => (
+              <option key={i + 1} value={i + 1}>{i + 1}</option>
+            ))}
+          </select>
         </div>
         <div className="mb-4">
           <label htmlFor="category" className="block text-gray-700 font-bold mb-2">Category:</label>
@@ -172,44 +178,57 @@ const SellProductPage = () => {
             required
           >
             <option value="">Select a category</option>
-            <option value="bicycle">Bicycle</option>
-            <option value="stationary">Stationary</option>
+            <option value="bicycle">Bicycles</option>
             <option value="Electronics">Electronics</option>
+            <option value="stationary">Stationary</option>
+           
           </select>
         </div>
         <div className="mb-4">
-          <label htmlFor="productId" className="block text-gray-700 font-bold mb-2">Product ID:</label>
+          <label htmlFor="sellerEmail" className="block text-gray-700 font-bold mb-2">sellerEmail:</label>
           <input
-            type="text"
-            id="productId"
-            name="productId"
-            value={formData.productId}
+            type="sellerEmail"
+            id="sellerEmail"
+            name="sellerEmail"
+            value={formData.sellerEmail}
             onChange={handleChange}
             className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 shadow-lg hover:shadow-xl"
-            placeholder="Enter product ID"
+            placeholder="Enter your sellerEmail"
             required
-            readOnly
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="isAvailable" className="flex items-center text-gray-700 font-bold">
-            <input
-              type="checkbox"
-              id="isAvailable"
-              name="isAvailable"
-              checked={formData.isAvailable}
-              onChange={handleChange}
-              className="mr-2 leading-tight"
-            />
-            <span className="text-sm">Is Available</span>
-          </label>
+          <label htmlFor="sellerPhone" className="block text-gray-700 font-bold mb-2">Phone Number:</label>
+          <input
+            type="tel"
+            id="sellerPhone"
+            name="sellerPhone"
+            value={formData.sellerPhone}
+            onChange={handleChange}
+            className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 shadow-lg hover:shadow-xl"
+            placeholder="Enter your phone number"
+            required
+          />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-        >
-          Create Product
-        </button>
+        <div className="mb-4">
+          <label htmlFor="isAvailable" className="block text-gray-700 font-bold mb-2">Available:</label>
+          <input
+            type="checkbox"
+            id="isAvailable"
+            name="isAvailable"
+            checked={formData.isAvailable}
+            onChange={handleChange}
+            className="form-checkbox h-5 w-5 text-blue-600"
+          />
+        </div>
+        <div className="mb-4">
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600"
+          >
+            Sell Product
+          </button>
+        </div>
       </form>
       <ToastContainer />
     </div>

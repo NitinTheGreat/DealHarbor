@@ -13,6 +13,7 @@ const BicyclesPage = () => {
     const fetchBicycles = async () => {
       try {
         const response = await axios.get('/api/bicycles');
+        console.log(response)
         if (response.status === 200) {
           setProducts(response.data);
         } else {
