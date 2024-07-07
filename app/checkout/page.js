@@ -31,16 +31,42 @@ const Checkout = () => {
 
   const handleBuyNow = async () => {
     try {
+      // Post to the Order database
       await axios.post('/api/Order', {
         userEmail,
         items: orders,
         subTotal
       });
+      let sellerEmail=""
+      // Fetch seller emails for each product
+      const salesData = await Promise.all(orders.map(async (order) => {
+        const response = await axios.get(`/api/products/${order.productId}`);
+        const product = response.data;
+
+        return {
+          ...order,
+          userEmail,
+          total: order.price * order.qty,
+          sellerEmail: product.sellerEmail
+        };
+      }));
+      console.log("Sales data:",salesData)
+      sellerEmail=salesData[0].sellerEmail
+      // sellerEmail: product.sellerEmail
+
+      // Post to the Sales database
+      await axios.post('/api/sales', {
+        sellerEmail: sellerEmail,
+        items: salesData,
+        subTotal
+      });
+
+      // Clear the cart and redirect to orders page
       localStorage.removeItem('cartProducts');
-      localStorage.removeItem('cart')
+      localStorage.removeItem('cart');
       router.push('/orders');
     } catch (error) {
-      console.error('Error creating order:', error);
+      console.error('Error creating order or sale:', error);
     }
   };
 
