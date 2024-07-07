@@ -20,6 +20,7 @@
     "jwt-decode": "^4.0.0",
     "mongoose": "^8.4.4",
     "next": "14.2.4",
+    "nodemailer": "^6.9.14",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
