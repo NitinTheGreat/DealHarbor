@@ -42,48 +42,50 @@ export async function POST(request) {
       items,
       subTotal,
     });
-
+    
     await newOrder.save();
 
-    // Send email notification to the buyer
     const mailOptions = {
-      from: 'dealharborind@gmail.com',
+      from: 'dealharborindia@gmail.com',
       to: userEmail,
       subject: 'Order Confirmation',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="text-align: center; color: #333;">Order Confirmation</h2>
-          <p style="text-align: center;">Dear Buyer,</p>
-          <p style="text-align: center;">Your order has been successfully placed. Below are the details:</p>
-          <table style="width: 100%; border-collapse: collapse; margin: 20px 0; background: #f9f9f9; border: 1px solid #ddd;">
-            <thead style="background: #333; color: #fff;">
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="text-align: center; color: #0044cc;">Order Confirmation</h2>
+          <p style="text-align: center;">Dear Customer,</p>
+          <p style="text-align: center;">Thank you for your order with Deal Harbor.</p>
+          
+          <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead style="background-color: #f0f0f0;">
               <tr>
-                <th style="text-align: left; padding: 12px;">Item</th>
-                <th style="text-align: center; padding: 12px;">Quantity</th>
-                <th style="text-align: right; padding: 12px;">Price</th>
+                <th style="padding: 10px; border: 1px solid #dddddd; text-align: left;">Item Name</th>
+                <th style="padding: 10px; border: 1px solid #dddddd; text-align: left;">Quantity</th>
+                <th style="padding: 10px; border: 1px solid #dddddd; text-align: left;">Price</th>
+                <th style="padding: 10px; border: 1px solid #dddddd; text-align: left;">Seller Email</th>
+                <th style="padding: 10px; border: 1px solid #dddddd; text-align: left;">Seller Phone</th>
+                <th style="padding: 10px; border: 1px solid #dddddd; text-align: left;">Product ID</th>
               </tr>
             </thead>
             <tbody>
               ${items.map(item => `
-                <tr style="border-bottom: 1px solid #ddd;">
-                  <td style="text-align: left; padding: 10px;">${item.name}</td>
-                  <td style="text-align: center; padding: 10px;">${item.qty}</td>
-                  <td style="text-align: right; padding: 10px;">₹${item.price}</td>
+                <tr>
+                  <td style="padding: 10px; border: 1px solid #dddddd;">${item.name}</td>
+                  <td style="padding: 10px; border: 1px solid #dddddd;">${item.qty}</td>
+                  <td style="padding: 10px; border: 1px solid #dddddd;">₹${item.price}</td>
+                  <td style="padding: 10px; border: 1px solid #dddddd;">${item.sellerEmail}</td>
+                  <td style="padding: 10px; border: 1px solid #dddddd;">${item.sellerPhone}</td>
+                  <td style="padding: 10px; border: 1px solid #dddddd;">${item.productId}</td>
                 </tr>
               `).join('')}
-              <tr>
-                <td colspan="2" style="text-align: right; padding: 12px;"><strong>Subtotal:</strong></td>
-                <td style="text-align: right; padding: 12px;"><strong>₹${subTotal}</strong></td>
-              </tr>
             </tbody>
           </table>
-          <p style="text-align: center;">Thank you for shopping with us.</p>
-          <p style="text-align: center;">Sincerely,<br/>The Deal Harbor Team</p>
+
+          <p style="text-align: left; margin-top: 20px;">Thank you for shopping with us.</p>
+          <p style="text-align: left;">Sincerely,<br/>The Deal Harbor Team</p>
         </div>
       `,
     };
 
-    // Send email using nodemailer
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ message: 'Order created successfully' }, { status: 201 });
