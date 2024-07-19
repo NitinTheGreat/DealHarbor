@@ -15,7 +15,7 @@ const ProductGrid = ({ products }) => {
   }
 
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font mt-0">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap justify-center -m-4">
           {products.map((product) => (

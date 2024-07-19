@@ -1,7 +1,7 @@
 // components/Navbar.js
-
 'use client';
 import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import "../styles/navStyle.css";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
@@ -14,12 +14,14 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [username, setUsername] = useState(""); 
+  const [username, setUsername] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const storedUsername = localStorage.getItem('username');
-    setIsLoggedIn(true); // Update isLoggedIn based on token presence
+    setIsLoggedIn(!!token); // Update isLoggedIn based on token presence
     setUsername(storedUsername || ''); // Set username from localStorage if available
 
     const navMenu = document.getElementById("nav-menu");
@@ -102,6 +104,20 @@ const Navbar = () => {
     setIsSearchVisible(!isSearchVisible);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm) {
+      e.target.reset(); // Search changed
+      setSearchTerm(""); // Search changed
+      toggleSearch(); // Search changed
+      router.push(`/allProducts?search=${searchTerm}`);
+    }
+  };
+
   return (
     <>
       <meta charSet="UTF-8" />
@@ -170,7 +186,11 @@ const Navbar = () => {
           </div>
           <div className="nav__actions">
             <i className="ri-search-line nav__search" id="search-btn" onClick={toggleSearch} />
-            {isLoggedIn ? (
+            {!isLoggedIn ? (
+              <Link href="/Login" className="nav__login">
+                <span>Login</span>
+              </Link>
+            ) : (
               <div className="nav__dropdown" onMouseEnter={handleDropdownToggle} onMouseLeave={handleDropdownToggle}>
                 <span className="nav__user-icon ri-user-line" />
                 {showDropdown && (
@@ -182,10 +202,6 @@ const Navbar = () => {
                   </ul>
                 )}
               </div>
-            ) : (
-              <Link href="/Login" className="nav__login">
-                <span>Login</span>
-              </Link>
             )}
 
             <i className="ri-shopping-cart-line nav__cart" id="Cart" onClick={toggleSidebar} />
@@ -197,18 +213,21 @@ const Navbar = () => {
         </nav>
       </header>
 
-      {/* Search Section */}
-      <div className={`search ${isSearchVisible ? "show-search" : ""}`} id="search">
-        <form action="" className="search__form">
+     {/* Search Section */}
+     <div className={`search ${isSearchVisible ? "show-search" : ""}`} id="search">
+        <form action="" className="search__form" onSubmit={handleSearchSubmit}>
           <i className="ri-search-line search__icon" />
           <input
             type="search"
             placeholder="What are you looking for?"
             className="search__input"
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
         </form>
         <i className="ri-close-line search__close" id="search-close" onClick={toggleSearch} />
       </div>
+
 
       {/* Card Sidebar */}
       <div
