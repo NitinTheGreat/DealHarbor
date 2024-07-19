@@ -1,3 +1,5 @@
+/* Preloader.module.css */
+
 .loadingContainer {
   position: fixed;
   top: 0;
@@ -6,6 +8,8 @@
   height: 3px;
   background-color: #f2f2f2;
   z-index: 9999;
+  display: flex;
+  align-items: center;
 }
 
 .loadingBar {
@@ -14,36 +18,11 @@
   transition: width 0.5s ease-in-out;
 }
 
-.loadingContent {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  width: 100%;
-  padding: 40px;
-}
-
-.loadingSpinner {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid #05b9f0;
-  border-top-color: transparent;
-  animation: spin 1s linear infinite;
-  margin-right: 10px;
-}
-
 .loadingText {
+  position: absolute;
+  right: 10px;
+  top: -25px;
+  font-size: 12px;
   font-weight: bold;
-  color: #05b9f0;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  color: #ff0000;
 }

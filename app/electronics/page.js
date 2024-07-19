@@ -2,9 +2,11 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import ProductGrid from '../../components/product';
+import Preloader from '../../components/Preloader';
 
 const Electronics = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchElectronics = async () => {
@@ -17,6 +19,8 @@ const Electronics = () => {
         setProducts(data);
       } catch (error) {
         console.error('Error fetching electronics:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -26,7 +30,11 @@ const Electronics = () => {
   return (
     <div>
       <h1>Electronics</h1>
-      <ProductGrid products={products} />
+      {loading ? (
+        <Preloader />
+      ) : (
+        <ProductGrid products={products} />
+      )}
     </div>
   );
 };

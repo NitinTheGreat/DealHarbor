@@ -1,8 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Preloader from '../../components/Preloader';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const userEmail = typeof window !== 'undefined' ? localStorage.getItem('email') : '';
 
   useEffect(() => {
@@ -22,6 +24,8 @@ const Orders = () => {
         setOrders(data.orders);
       } catch (error) {
         console.error('Error fetching orders:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -31,7 +35,9 @@ const Orders = () => {
   return (
     <div className="container mx-auto p-4 mt-28">
       <h1 className="text-2xl font-bold mb-4">Your Orders</h1>
-      {orders.length === 0 ? (
+      {loading ? (
+        <Preloader />
+      ) : orders.length === 0 ? (
         <p>No orders found.</p>
       ) : (
         <div className="overflow-x-auto">

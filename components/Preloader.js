@@ -17,10 +17,7 @@ const Preloader = () => {
   return (
     <div className={styles.loadingContainer}>
       <div className={styles.loadingBar} style={{ width: `${progress}%` }} />
-      {/* <div className={styles.loadingContent}>
-        <div className={styles.loadingSpinner}></div>
-        <div className={styles.loadingText}>Loading...</div>
-      </div> */}
+      <div className={styles.loadingText}>{progress}%</div>
     </div>
   );
 };
