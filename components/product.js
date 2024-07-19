@@ -18,7 +18,7 @@ const ProductGrid = ({ products }) => {
     <section className="text-gray-600 body-font mt-0">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap justify-center -m-4">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <div 
               key={product._id} 
               className="p-4 w-full sm:w-1/2 lg:w-1/4"
@@ -34,7 +34,8 @@ const ProductGrid = ({ products }) => {
                       src={product.image}
                       layout="fill"
                       objectFit="contain"
-                      sizes="100vw"
+                      sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      loading={index < 2 ? 'eager' : 'lazy'} // Eager load first two images, lazy load others
                     />
                   </a>
                   <div className="mt-4">
