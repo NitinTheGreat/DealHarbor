@@ -1,8 +1,8 @@
 // app/allProducts/page.js
 
-'use client'
+'use client';
 import ProductGrid from '../../components/product';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 const AllProductsPage = () => {
@@ -30,7 +30,9 @@ const AllProductsPage = () => {
   return (
     <div>
       <h1 className="text-3xl font-semibold text-gray-900 mb-6 mt-28 ml-6">All Results...</h1>
-      <ProductGrid products={products} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProductGrid products={products} />
+      </Suspense>
     </div>
   );
 };
