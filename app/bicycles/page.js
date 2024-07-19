@@ -70,11 +70,7 @@ const BicyclesPage = () => {
 };
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const pages = [];
-
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(i);
-  }
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
     <div className="flex justify-center mt-8 mb-4">

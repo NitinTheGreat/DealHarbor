@@ -5,7 +5,6 @@ import axios from 'axios';
 import Preloader from '../../components/Preloader';
 import styles from '../../styles/Preloader.module.css'; // Ensure the path is correct
 
-// Lazy load the ProductGrid component
 const ProductGrid = React.lazy(() => import('../../components/product'));
 
 const Stationary = () => {
@@ -34,7 +33,7 @@ const Stationary = () => {
         console.error('Error fetching stationary products:', error);
         setError('Error fetching stationary products');
       } finally {
-        setLoading(false); // Set loading to false whether successful or not
+        setLoading(false);
       }
     };
 
@@ -42,8 +41,8 @@ const Stationary = () => {
   }, [page]);
 
   const handlePageChange = (newPage) => {
+    if (newPage < 1 || newPage > totalPages) return;
     setPage(newPage);
-    setProducts([]); // Reset products for new page
   };
 
   return (
@@ -74,11 +73,7 @@ const Stationary = () => {
 };
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const pages = [];
-
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(i);
-  }
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
     <div className="flex justify-center mt-8 mb-4">

@@ -4,7 +4,6 @@ import React, { useEffect, useState, Suspense } from 'react';
 import axios from 'axios';
 import Preloader from '../../components/Preloader';
 
-// Lazy load the ProductGrid component
 const ProductGrid = React.lazy(() => import('../../components/product'));
 
 const Electronics = () => {
@@ -20,7 +19,7 @@ const Electronics = () => {
       setError(null);
       try {
         const response = await axios.get('/api/electronics', {
-          params: { page, limit: 16 } // Change limit to 16
+          params: { page, limit: 16 }
         });
 
         if (response.status === 200) {
@@ -33,7 +32,7 @@ const Electronics = () => {
         console.error('Error fetching electronics:', error);
         setError('Error fetching electronics');
       } finally {
-        setLoading(false); // Set loading to false whether successful or not
+        setLoading(false);
       }
     };
 
@@ -71,11 +70,7 @@ const Electronics = () => {
 };
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const pages = [];
-
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(i);
-  }
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
     <div className="flex justify-center mt-8 mb-4">

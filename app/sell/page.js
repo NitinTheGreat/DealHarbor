@@ -88,7 +88,7 @@ const SellProductPage = () => {
       <h1 className="text-3xl font-bold mt-8 mb-4 text-center">Sell a Product</h1>
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-lg">
         <div className="mb-4">
-          <label className="custum-file-upload">
+          <label className="custum-file-upload cursor-pointer">
             <div className="icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-20 fill-gray-600">
                 <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
@@ -185,7 +185,7 @@ const SellProductPage = () => {
           </select>
         </div>
         <div className="mb-4">
-          <label htmlFor="sellerEmail" className="block text-gray-700 font-bold mb-2">sellerEmail:</label>
+          <label htmlFor="sellerEmail" className="block text-gray-700 font-bold mb-2">Seller Email:</label>
           <input
             type="sellerEmail"
             id="sellerEmail"
@@ -193,7 +193,7 @@ const SellProductPage = () => {
             value={formData.sellerEmail}
             onChange={handleChange}
             className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 shadow-lg hover:shadow-xl"
-            placeholder="Enter your sellerEmail"
+            placeholder="Enter your Email"
             required
           />
         </div>
