@@ -56,7 +56,7 @@ const Stationary = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : products.length === 0 ? (
-        <p>No products found in category 'stationary'</p>
+        <p>No products found in this category</p>
       ) : (
         <>
           <Suspense fallback={<Preloader />}>
