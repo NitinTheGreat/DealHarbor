@@ -44,6 +44,7 @@ const router = useRouter();
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful:', data.message);
+        localStorage.clear();
         
         // Store the token and username in local storage
         localStorage.setItem('token', data.token);

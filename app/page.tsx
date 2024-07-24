@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import "../styles/page.css";
 
 const Home = () => {
   const [device, setDevice] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
@@ -32,15 +31,15 @@ const Home = () => {
   };
 
   return (
-    <main>
-      <iframe
-        src={iframeSrc[device]}
-        frameBorder="0"
-        width="100%"
-        height="100%"
-        style={{ border: 'none' }}
-        title="Zero Gravity Physics Landing Page"
-      ></iframe>
+    <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh', overflow: 'hidden' }}>
+      <div style={{ width: '100%', height: '100%', maxWidth: '1200px', maxHeight: '800px', position: 'relative' }}>
+        <iframe
+          src={iframeSrc[device]}
+          frameBorder="0"
+          style={{ width: '100%', height: '100%', border: 'none' }}
+          title="Zero Gravity Physics Landing Page"
+        ></iframe>
+      </div>
     </main>
   );
 };
