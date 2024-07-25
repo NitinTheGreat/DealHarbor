@@ -157,7 +157,7 @@ export function HomePage() {
                 /> */}
                 <iframe 
   className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-lg"
-  src='https://my.spline.design/draganddropbookpencilschoolcopy-1cdceb0737c67d645306637df68411be/'
+  src='https://my.spline.design/draganddropbookpencilschoolcopy-1cdceb0737c67d645306637df68411be/' 
   frameBorder='0' 
   width='100%' 
   height='100%'>
@@ -176,11 +176,12 @@ export function HomePage() {
                 }}
                 transition={{ duration: 0.8 }}
               >
-                <img
+                {/* <img
                   src="/placeholder.svg"
                   alt="Connect with Sellers"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+                /> */}
+                <iframe src='https://my.spline.design/robot4legslightcopy-f27c1f514c1bb12d062e323152a5095d/' frameBorder='0' width='100%' height='100%'></iframe>
               </motion.div>
               <motion.div
                 className="space-y-4"
