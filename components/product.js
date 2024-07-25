@@ -104,4 +104,6 @@ const ProductGrid = memo(({ products }) => {
   );
 });
 
+ProductGrid.displayName = 'ProductGrid';
+
 export default ProductGrid;
