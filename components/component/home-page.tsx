@@ -158,8 +158,8 @@ export function HomePage() {
                   </div>
                 </div>
                 <p className="text-muted-foreground mt-4 animate-fade-in-up">
-                  "DealHarbor has been a game-changer for me. I've found\n amazing deals on textbooks and electronics,
-                  and the\n platform's security gives me peace of mind."
+                DealHarbor has been a game-changer for me. I&#39;ve found amazing deals on textbooks and electronics, and the platform&#39;s security gives me peace of mind.
+
                 </p>
               </div>
               <div className="bg-[#f0f0f0] p-6 rounded-xl shadow-sm group animate-fade-in-up">
@@ -174,8 +174,7 @@ export function HomePage() {
                   </div>
                 </div>
                 <p className="text-muted-foreground mt-4 animate-fade-in-up">
-                  "I love how DealHarbor connects me with fellow VIT students\n who have the exact items I'm looking
-                  for. The negotiation\n process is so smooth and efficient."
+                I love how DealHarbor connects me with fellow VIT students who have the exact items I&#39;m looking for. The negotiation process is so smooth and efficient.
                 </p>
               </div>
               <div className="bg-[#f0f0f0] p-6 rounded-xl shadow-sm group animate-fade-in-up">
@@ -190,8 +189,7 @@ export function HomePage() {
                   </div>
                 </div>
                 <p className="text-muted-foreground mt-4 animate-fade-in-up">
-                  "DealHarbor has made selling my old textbooks and\n electronics a breeze. I've been able to connect
-                  with\n interested buyers quickly and securely."
+                DealHarbor has made selling my old textbooks and electronics a breeze. I&#39;ve been able to connect with interested buyers quickly and securely.
                 </p>
               </div>
             </div>
