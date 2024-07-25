@@ -52,8 +52,7 @@ html {
 }
 
 body,
-input,
-button {
+input {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
 }
@@ -69,8 +68,7 @@ body {
   top: 0;
 }
 
-input,
-button {
+input {
   border: none;
   outline: none;
 }
@@ -601,55 +599,9 @@ img {
   font-weight: bolder;
   margin-bottom: 5vh;
 } */
-.button-cart {
-  position: relative;
-  overflow: hidden;
-  outline: none;
-  cursor: pointer;
-  border-radius: 50px;
-  background-color: hsl(255deg 50% 40%);
-  border: solid 4px hsl(50deg 100% 50%);
-  font-family: inherit;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* width: 15vw; */
-  width: 85%;
-  height: 8vh;
-}
 
-.default-btn, .hover-btn {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px 20px;
-  border-radius: 50px;
-  font-size: 17px;
-  font-weight: 500;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  position: absolute;
-  inset: 0;
-  justify-content: center;
-}
 
-.default-btn {
-  background-color: hsl(255deg 50% 40%);
-  color: hsl(0, 0%, 100%);
-  z-index: 1;
-}
-
-.hover-btn {
-  background-color: hsl(255deg 50% 49%);
-  color: hsl(50deg 100% 50%);
-  transform: translateY(100%);
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-}
-
-button:hover .default-btn {
+/* button:hover .default-btn {
   transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
@@ -704,7 +656,7 @@ button:hover .hover-btn {
  
  .btn:active {
   transform: scale(0.9);
- }
+ } */
 
 
  /* Sign Up Component  */

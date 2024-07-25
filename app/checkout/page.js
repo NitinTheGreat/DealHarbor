@@ -73,7 +73,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-white">
+    <div className="flex min-h-screen w-full flex-col bg-white mt-16">
       <main className="container mx-auto grid grid-cols-1 gap-8 px-4 py-8 md:grid-cols-1 md:gap-12 lg:px-6 xl:grid-cols-1">
         <div className="grid gap-8">
           <div className="grid gap-4">

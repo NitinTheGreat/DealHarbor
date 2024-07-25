@@ -1,4 +1,3 @@
-// components/Navbar.js
 'use client';
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
@@ -6,6 +5,7 @@ import Link from "next/link";
 import "../styles/navStyle.css";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
 import { useCart } from "../context/CartContext";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const { cart, subTotal, addToCart, removeFromCart, clearCart } = useCart();
@@ -21,8 +21,8 @@ const Navbar = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const storedUsername = localStorage.getItem('username');
-    setIsLoggedIn(!!token); // Update isLoggedIn based on token presence
-    setUsername(storedUsername || ''); // Set username from localStorage if available
+    setIsLoggedIn(!!token);
+    setUsername(storedUsername || '');
 
     const navMenu = document.getElementById("nav-menu");
     const navToggle = document.getElementById("nav-toggle");
@@ -64,7 +64,6 @@ const Navbar = () => {
       searchClose.addEventListener("click", hideSearch);
     }
 
-    // Cleanup event listeners on unmount
     return () => {
       if (navToggle) {
         navToggle.removeEventListener("click", showMenu);
@@ -111,9 +110,9 @@ const Navbar = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm) {
-      e.target.reset(); // Search changed
-      setSearchTerm(""); // Search changed
-      toggleSearch(); // Search changed
+      e.target.reset();
+      setSearchTerm("");
+      toggleSearch();
       router.push(`/allProducts?search=${searchTerm}`);
     }
   };
@@ -142,8 +141,7 @@ const Navbar = () => {
               <li className="nav__item">
                 <Link
                   href="/bicycles"
-                  className={`nav__link ${activeLink === "bicycles" ? "active" : ""
-                    }`}
+                  className={`nav__link ${activeLink === "bicycles" ? "active" : ""}`}
                   onClick={() => handleSetActiveLink("bicycles")}
                 >
                   Bicycles
@@ -152,8 +150,7 @@ const Navbar = () => {
               <li className="nav__item">
                 <Link
                   href="/electronics"
-                  className={`nav__link ${activeLink === "electronics" ? "active" : ""
-                    }`}
+                  className={`nav__link ${activeLink === "electronics" ? "active" : ""}`}
                   onClick={() => handleSetActiveLink("electronics")}
                 >
                   Electronics
@@ -162,8 +159,7 @@ const Navbar = () => {
               <li className="nav__item">
                 <Link
                   href="/stationary"
-                  className={`nav__link ${activeLink === "stationary" ? "active" : ""
-                    }`}
+                  className={`nav__link ${activeLink === "stationary" ? "active" : ""}`}
                   onClick={() => handleSetActiveLink("stationary")}
                 >
                   Stationary
@@ -172,8 +168,7 @@ const Navbar = () => {
               <li className="nav__item">
                 <Link
                   href="/sell"
-                  className={`nav__link ${activeLink === "sell" ? "active" : ""
-                    }`}
+                  className={`nav__link ${activeLink === "sell" ? "active" : ""}`}
                   onClick={() => handleSetActiveLink("sell")}
                 >
                   Sell Item
@@ -213,8 +208,8 @@ const Navbar = () => {
         </nav>
       </header>
 
-     {/* Search Section */}
-     <div className={`search ${isSearchVisible ? "show-search" : ""}`} id="search">
+      {/* Search Section */}
+      <div className={`search ${isSearchVisible ? "show-search" : ""}`} id="search">
         <form action="" className="search__form" onSubmit={handleSearchSubmit}>
           <i className="ri-search-line search__icon" />
           <input
@@ -228,89 +223,147 @@ const Navbar = () => {
         <i className="ri-close-line search__close" id="search-close" onClick={toggleSearch} />
       </div>
 
-
-      {/* Card Sidebar */}
-      <div
-        className={`sidebar ${isSidebarVisible ? "show" : ""}`}
-      >
-        <h2 className="font-bold text-xl p-4">Your Cart</h2>
-        <span
-          className="close-icon cart-close"
-          onClick={toggleSidebar}
-        >
-          <i className="ri-close-line" />
-        </span>
-
-        <ol className="list-decimal font-semibold pl-8">
-          {Object.keys(cart).map((itemCode) => {
-            const item = cart[itemCode];
-            return (
-              <li key={itemCode}>
-                <div className="item flex my-5">
-                  <div className="w-2/3 font-semibold">
-                    {item.name}
-                  </div>
-                  <div className="flex font-semibold items-center justify-center w-1/3 text-lg">
-                    <AiFillMinusCircle className="cursor-pointer text-purple-400"
-                      onClick={() => removeFromCart(itemCode, 1)} />
-                    <span className="mx-2 text-sm">{item.qty}</span>
-                    <AiFillPlusCircle className="cursor-pointer text-purple-400"
-                      onClick={() => addToCart(itemCode, item.price, 1, item.name)} />
-                  </div>
+     {/* Cart Sidebar */}
+<div
+  className={`fixed inset-y-0 right-0 z-[999999] flex w-full sm:w-[25vw] xs:w-[35vw] flex-col bg-background shadow-lg transition-transform transform ${isSidebarVisible ? "translate-x-0" : "translate-x-full"}`}
+>
+  <div className="flex items-center justify-between border-b bg-card px-6 py-4">
+    <h2 className="text-2xl font-bold">Your Cart</h2>
+    <button className="rounded-full p-2 transition-colors hover:bg-muted" aria-label="Close cart" onClick={toggleSidebar}>
+      <XIcon className="h-5 w-5" />
+    </button>
+  </div>
+  <div className="flex-1 overflow-y-auto px-6 py-4">
+    {Object.keys(cart).length === 0 ? (
+      <p className="text-center text-muted-foreground">Your cart is empty.</p>
+    ) : (
+      <ul className="space-y-4">
+        {Object.keys(cart).map((itemCode) => {
+          const item = cart[itemCode];
+          return (
+            <li
+              key={itemCode}
+              className="flex items-center justify-between space-x-4 border-b py-4"
+            >
+              <div className="flex items-center space-x-4">
+                <div>
+                  <h3 className="text-lg font-semibold">{item.name}</h3>
+                  <p className="text-muted-foreground">
+                    {item.qty} x ₹{item.price}
+                  </p>
                 </div>
-              </li>
-            );
-          })}
-        </ol>
+              </div>
+              <div className="flex items-center space-x-2">
+                <button
+                  className="rounded-full p-2 transition-colors hover:bg-muted"
+                  aria-label="Decrease quantity"
+                  onClick={() => removeFromCart(itemCode, 1, item.price, item.name, item.image)}
+                >
+                  <AiFillMinusCircle className="h-5 w-5 text-pink-300" />
+                </button>
+                <span>{item.qty}</span>
+                <button
+                  className="rounded-full p-2 transition-colors hover:bg-muted"
+                  aria-label="Increase quantity"
+                  onClick={() => addToCart(itemCode, 1, item.price, item.name, item.image)}
+                >
+                  <AiFillPlusCircle className="h-5 w-5 text-pink-300" />
+                </button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    )}
+  </div>
+  <div className="border-t bg-card px-6 py-4">
+    <div className="flex items-center justify-between">
+      <p className="text-muted-foreground">Subtotal</p>
+      <p className="text-2xl font-bold">
+        ₹{subTotal}
+        <span className="ml-2 text-lg font-normal text-muted-foreground">INR</span>
+      </p>
+    </div>
+    <div className="mt-4 flex gap-2">
+      <Button
+        onClick={() => router.push('/checkout')}
+        className="flex-1 bg-primary text-primary-foreground transition-all hover:bg-primary/90 focus:ring-2 focus:ring-primary/50 active:scale-95"
+      >
+        Checkout
+      </Button>
+      <Button
+        onClick={clearCart}
+        variant="outline"
+        className="flex-1 transition-all hover:bg-muted focus:ring-2 focus:ring-muted/50 active:scale-95"
+      >
+        Clear Cart
+      </Button>
+    </div>
+  </div>
+</div>
 
-        <div className="bottom">
-          <div className="subtotal">
-            <span className="total">Subtotal:</span>
-            <span className="price">₹{subTotal}</span>
-          </div>
-          <button className="button button-cart">
-            <div className="default-btn flex items-center">
-              <svg
-                className="css-i6dzq1"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                fill="none"
-                strokeWidth="2"
-                stroke="#FFF"
-                height="20"
-                width="20"
-                viewBox="0 0 24 24"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle r="3" cy="12" cx="12"></circle>
-              </svg>
-              <span className="ml-2">Shop Now</span>
-            </div>
-            <div className="hover-btn flex items-center">
-              <svg
-                className="css-i6dzq1"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                fill="none"
-                strokeWidth="2"
-                stroke="#ffd300"
-                height="20"
-                width="20"
-                viewBox="0 0 24 24"
-              >
-                <circle r="1" cy="21" cx="9"></circle>
-                <circle r="1" cy="21" cx="20"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              <Link href="/checkout"><span className="ml-2">Checkout</span></Link>
-            </div>
-          </button>
 
-          <button onClick={() => clearCart()} className="btn">Clear Cart</button>
-        </div>
-      </div>
     </>
   );
 };
+function MinusIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h14" />
+    </svg>
+  )
+}
 
+
+function PlusIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
+  )
+}
+
+
+function XIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  )
+}
 export default Navbar;
