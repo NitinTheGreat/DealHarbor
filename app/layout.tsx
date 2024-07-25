@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { CartProvider } from "../context/CartContext";
 import { cn } from '@/lib/utils';
-
+import { Analytics } from "@vercel/analytics/react"
 const inter = Inter({ subsets: ["latin"] });
 
 const fontHeading = Manrope({
@@ -43,6 +43,7 @@ export default function RootLayout({
         <CartProvider>
           <Navbar />
           {children}
+          <Analytics />
         </CartProvider>
       </body>
     </html>
