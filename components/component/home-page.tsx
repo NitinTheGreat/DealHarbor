@@ -150,11 +150,19 @@ export function HomePage() {
                 }}
                 transition={{ duration: 0.8 }}
               >
-                <img
+                {/* <img
                   src="/placeholder.svg"
                   alt="Discover the Best Deals"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+                /> */}
+                <iframe 
+  className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-lg"
+  src='https://my.spline.design/draganddropbookpencilschoolcopy-1cdceb0737c67d645306637df68411be/'
+  frameBorder='0' 
+  width='100%' 
+  height='100%'>
+</iframe>
+
               </motion.div>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
