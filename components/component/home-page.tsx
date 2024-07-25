@@ -231,11 +231,12 @@ export function HomePage() {
                 }}
                 transition={{ duration: 0.8 }}
               >
-                <img
+                {/* <im
                   src="/placeholder.svg"
                   alt="Sell with Confidence"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+                /> */}
+                <iframe  src='https://my.spline.design/cameracopy-97b87e569532fc101a8e095c6963d0ec/'      frameBorder='0' width='100%' height='100%'></iframe>
               </motion.div>
             </div>
           </div>
