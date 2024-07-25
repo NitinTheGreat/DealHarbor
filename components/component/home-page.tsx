@@ -26,7 +26,7 @@ To read more about using these font, please visit the Next.js documentation:
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import Link from "next/link"
-
+import { SVGProps } from "react";
 export function HomePage() {
   return (
     <div className="flex flex-col min-h-dvh">
@@ -238,7 +238,7 @@ export function HomePage() {
   )
 }
 
-function AnchorIcon(props) {
+function AnchorIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -256,11 +256,10 @@ function AnchorIcon(props) {
       <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
       <circle cx="12" cy="5" r="3" />
     </svg>
-  )
+  );
 }
 
-
-function CopyrightIcon(props) {
+function CopyrightIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -277,11 +276,10 @@ function CopyrightIcon(props) {
       <circle cx="12" cy="12" r="10" />
       <path d="M14.83 14.83a4 4 0 1 1 0-5.66" />
     </svg>
-  )
+  );
 }
 
-
-function LinkedinIcon(props) {
+function LinkedinIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -299,11 +297,10 @@ function LinkedinIcon(props) {
       <rect width="4" height="12" x="2" y="9" />
       <circle cx="4" cy="4" r="2" />
     </svg>
-  )
+  );
 }
 
-
-function ShieldIcon(props) {
+function ShieldIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -319,11 +316,10 @@ function ShieldIcon(props) {
     >
       <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
     </svg>
-  )
+  );
 }
 
-
-function WalletIcon(props) {
+function WalletIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -340,11 +336,10 @@ function WalletIcon(props) {
       <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
       <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
     </svg>
-  )
+  );
 }
 
-
-function XIcon(props) {
+function XIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -361,5 +356,5 @@ function XIcon(props) {
       <path d="M18 6 6 18" />
       <path d="m6 6 12 12" />
     </svg>
-  )
+  );
 }
