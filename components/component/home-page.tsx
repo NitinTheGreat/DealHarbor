@@ -54,7 +54,7 @@ export function HomePage() {
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4 animate-fade-in-up">
-                <h2 className="text-3xl sm:text-4xl font-bold">Discover VIT's New Hub for Buying and Selling!</h2>
+                <h2 className="text-3xl sm:text-4xl font-bold">Discover VIT&#39;s New Hub for Buying and Selling!</h2>
                 <p className="text-muted-foreground">
                   Browse through a wide range of products and services offered by your fellow VIT students. Find the
                   best deals and negotiate with sellers directly.
