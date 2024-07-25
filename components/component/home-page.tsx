@@ -91,8 +91,8 @@ export function HomePage() {
             <div className="absolute h-48 w-48 bg-purple-200 rounded-full opacity-50 -bottom-8 left-32"></div>
             <div className="absolute h-40 w-40 bg-pink-200 rounded-full opacity-50 top-20 right-20"></div>
           </div>
-          <div className="z-10 space-y-4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-800">
+          <div className="z-10 space-y-10 mt-10">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-800 ">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -101,7 +101,7 @@ export function HomePage() {
                 <span ref={typedRef1} />
               </motion.div>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-800">
+            <p className="text-lg  sm:text-xl md:text-2xl text-gray-800">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
