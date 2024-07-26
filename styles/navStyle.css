@@ -29,7 +29,7 @@
 
   /*========== z index ==========*/
   --z-fixed: 100;
-  --z-modal: 1000;
+  --z-modal: 10000;
 }
 
 /*========== Responsive typography ==========*/
@@ -192,6 +192,9 @@ img {
   align-items: center;
 
 }
+.login-icon{
+  font-size: 0;
+}
 
 .nav__actions {
   display: flex;
@@ -201,6 +204,7 @@ img {
   font-size: 1.25rem;
 
 }
+
 .logo{
   display: flex;
   align-items: center;
@@ -789,12 +793,13 @@ button:hover .hover-btn {
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 1000;
   width: 20vw;
 }
 @media screen and (max-width: 700px) {
   .nav__dropdown-menu {
     width: 40vw;
+  
   }
 }
 
@@ -809,7 +814,7 @@ button:hover .hover-btn {
 }
 
 .nav__dropdown-item:hover {
-  background-color: #f0f0f0;
+  background-color: #edd9ec;
 }
 
 /* Keep dropdown visible for a short duration after hover */

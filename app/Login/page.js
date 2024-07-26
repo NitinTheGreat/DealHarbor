@@ -1,28 +1,24 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Link from 'next/link';
 const Login = () => {
+  const router = useRouter();
 
-const router = useRouter();
- useEffect(() => {
-   if(localStorage.getItem('token')){
-    router.push('/')
-   }
- 
-   
- }, [])
- 
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/');
+    }
+  }, []);
 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
   const [errorMessage, setErrorMessage] = useState('');
- 
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -31,7 +27,7 @@ const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch('/api/login', {
         method: 'POST',
@@ -40,17 +36,15 @@ const router = useRouter();
         },
         body: JSON.stringify(formData),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful:', data.message);
         localStorage.clear();
-        
-        // Store the token and username in local storage
         localStorage.setItem('token', data.token);
         localStorage.setItem('username', data.name); // Assuming the backend sends 'name' in the response
         localStorage.setItem('email', data.email);
-  
+
         toast.success('Login Successful', {
           position: "top-right",
           autoClose: 3000,
@@ -60,17 +54,19 @@ const router = useRouter();
           draggable: true,
           style: { width: "auto", whiteSpace: "nowrap" }
         });
-  
-        // Clear form data
+
         setFormData({
           email: '',
           password: '',
         });
-  
+
+        // Dispatch a custom event to notify the navbar about the login
+        const loginEvent = new CustomEvent('userLoggedIn', { detail: data });
+        window.dispatchEvent(loginEvent);
+
         setTimeout(() => {
           router.push('/');
         }, 2000);
-        
       } else {
         const errorData = await response.json();
         toast.error(errorData.message, {
@@ -85,10 +81,9 @@ const router = useRouter();
       }
     } catch (error) {
       console.error('Login error:', error);
-      setErrorMessage('Error logging in. Please try again.'); // Generic error message
+      setErrorMessage('Error logging in. Please try again.');
     }
   };
-  
 
   useEffect(() => {
     const loginClose = document.getElementById("login-close");
@@ -104,7 +99,6 @@ const router = useRouter();
       loginClose.addEventListener("click", hideLogin);
     }
 
-    // Cleanup event listeners on unmount
     return () => {
       if (loginClose) {
         loginClose.removeEventListener("click", hideLogin);
@@ -167,9 +161,7 @@ const router = useRouter();
                   />
                 </div>
 
-                {
-                  errorMessage ? <div className="text-red-500">{errorMessage}</div> : null
-                }
+                {errorMessage && <div className="text-red-500">{errorMessage}</div>}
 
                 <div className="mt-8 md:flex md:items-center">
                   <button
