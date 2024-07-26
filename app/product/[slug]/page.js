@@ -34,6 +34,7 @@ const Product = ({ params }) => {
   }, [params.slug]);
 
   const handleAddToCart = () => {
+    console.log("Add to Cart button clicked"); // Debugging
     if (product) {
       const itemCode = params.slug;
       const price = product.price;
@@ -42,13 +43,13 @@ const Product = ({ params }) => {
       const sellerName = product.sellerName;
       const sellerEmail = product.sellerEmail;
       const sellerPhone = product.sellerPhone;
-  
+
       // Retrieve cart items from localStorage
       const storedProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
-  
+
       // Check if the product already exists in cart
       const existingProductIndex = storedProducts.findIndex(item => item.itemCode === itemCode);
-  
+
       if (existingProductIndex !== -1) {
         // Product already exists, increase quantity by 1
         storedProducts[existingProductIndex].qty += 1;
@@ -65,13 +66,13 @@ const Product = ({ params }) => {
           sellerPhone,
         });
       }
-  
+
       // Update localStorage with modified cart items
       localStorage.setItem('cartProducts', JSON.stringify(storedProducts));
-  
+
       // Call addToCart function from context to update cart state
       addToCart(itemCode, price, 1, name);
-  
+
       // Show toast notification
       toast.success('Item added to cart!');
     }
@@ -95,35 +96,39 @@ const Product = ({ params }) => {
       {loading ? (
         <Preloader />
       ) : (
-        <div className="absolute inset-0 z-[-1] animate-float-shapes">
-          <div className="absolute top-[10%] left-[20%] w-[100px] h-[100px] bg-[#ce93d8] rounded-full opacity-50 animate-float-shape" />
-          <div className="absolute bottom-[15%] right-[25%] w-[80px] h-[80px] bg-[#ba68c8] rounded-full opacity-50 animate-float-shape" />
-          <div className="absolute top-[30%] left-[40%] w-[120px] h-[120px] bg-gradient-to-br from-[#f9f7fb] to-[#f0e9f4] rounded-full opacity-50 animate-float-shape" />
-          <div className="absolute bottom-[20%] right-[15%] w-[90px] h-[90px] bg-[#ab47bc] rounded-full opacity-50 animate-float-shape" />
-          <div className="absolute top-[50%] left-[10%] w-[80px] h-[80px] bg-[#ce93d8] rounded-full opacity-50 animate-float-shape" />
-          <div className="absolute bottom-[30%] right-[5%] w-[100px] h-[100px] bg-gradient-to-br from-[#f9f7fb] to-[#f0e9f4] rounded-full opacity-50 animate-float-shape" />
-        </div>
+        // <div className="absolute inset-0 -z[-1] animate-float-shapes">
+        //   <div className="absolute top-[10%] left-[20%] w-[100px] h-[100px] bg-[#ce93d8] rounded-full opacity-50 animate-float-shape" />
+        //   <div className="absolute bottom-[15%] right-[25%] w-[80px] h-[80px] bg-[#ba68c8] rounded-full opacity-50 animate-float-shape" />
+        //   <div className="absolute top-[30%] left-[40%] w-[120px] h-[120px] bg-gradient-to-br from-[#f9f7fb] to-[#f0e9f4] rounded-full opacity-50 animate-float-shape" />
+        //   <div className="absolute bottom-[20%] right-[15%] w-[90px] h-[90px] bg-[#ab47bc] rounded-full opacity-50 animate-float-shape" />
+        //   <div className="absolute top-[50%] left-[10%] w-[80px] h-[80px] bg-[#ce93d8] rounded-full opacity-50 animate-float-shape" />
+        //   <div className="absolute bottom-[30%] right-[5%] w-[100px] h-[100px] bg-gradient-to-br from-[#f9f7fb] to-[#f0e9f4] rounded-full opacity-50 animate-float-shape" />
+        // </div>
+        <div className="hello"></div>
       )}
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-24 flex flex-col md:flex-row items-center justify-between gap-12">
-        <div className="flex-1 relative mt-[10vh] flex justify-center">
-          <div className="relative w-full max-w-md overflow-hidden group animate-slide-in-left" style={{ height: 'calc(100% + 10%)' }}>
+        <div className="flex-1 relative flex justify-center mt-0 md:mt-[10vh]">
+          <div
+            className="relative w-full max-w-md overflow-hidden group animate-slide-in-left"
+            style={{ height: '60vh', width: '80vw' }}
+          >
             {product ? (
               <Image
                 src={product.image}
                 alt="Product"
-                layout="responsive"
-                width={640}
-                height={704} // 10% more than width (640 + 64)
+                layout="fill"
+                objectFit="cover"
                 className="rounded-xl shadow-lg transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-2 cursor-pointer"
                 onClick={handleImageClick}
               />
             ) : (
               <div className="w-full h-full bg-gray-200 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500">No Image Available</span>
+                <span className="text-gray-500">Loading...</span>
               </div>
             )}
           </div>
         </div>
+
         <div className="flex-1 space-y-6 animate-slide-in-right flex flex-col items-center md:items-start">
           <div className="text-sm text-muted-foreground text-center md:text-left">
             Seller Name: {Sellername}
@@ -137,7 +142,12 @@ const Product = ({ params }) => {
               : 'Loading product details...'}
           </p>
           <div className="flex gap-4 justify-center">
-            <Button size="lg" className="animate-bounce-in" onClick={handleAddToCart} disabled={!product}>
+            <Button
+              size="lg"
+              className='z[100]'
+              onClick={handleAddToCart}
+              
+            >
               Add to Cart
             </Button>
           </div>
