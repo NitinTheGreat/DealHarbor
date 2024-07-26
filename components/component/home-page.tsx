@@ -4,6 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 import Typed from 'typed.js';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { SVGProps } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 export function HomePage() {
   const controls = useAnimation();
@@ -12,6 +13,7 @@ export function HomePage() {
   const typedRef3 = useRef(null);
   const typedRef4 = useRef(null);
   const typedRef5 = useRef(null);
+  const router= useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,8 +113,8 @@ export function HomePage() {
               </motion.div>
             </p>
             <div className="flex gap-4">
-              <Button size="lg">Explore Now!</Button>
-              <Button variant="outline" size="lg">
+              <Button onClick={() => router.push('/bicycles')} size="lg">Explore Now!</Button>
+              <Button onClick={() => router.push('/Login')} variant="outline" size="lg">
                 Join the Community
               </Button>
             </div>
@@ -130,7 +132,7 @@ export function HomePage() {
                   visible: { opacity: 1, y: 0 },
                   hidden: { opacity: 0, y: 100 },
                 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 1 }}
               >
                 <h2 className="text-3xl sm:text-4xl font-bold">
                   <span ref={typedRef3} />
@@ -138,7 +140,7 @@ export function HomePage() {
                 <p className="text-muted-foreground">
                   Browse through a wide range of products and services offered by your fellow VIT students. Find the best deals and negotiate with sellers directly.
                 </p>
-                <Button size="lg">Get Started with DealHarbor!</Button>
+                <Button onClick={() => router.push('/electronics')}  size="lg">Get Started with DealHarbor!</Button>
               </motion.div>
               <motion.div
                 className="relative h-64 sm:h-80 md:h-96 overflow-hidden rounded-xl group"
@@ -193,8 +195,8 @@ export function HomePage() {
                 <p className="text-muted-foreground">
                   Directly communicate with sellers, negotiate prices, and arrange secure transactions. Build trust and relationships within the VIT community.
                 </p>
-                <Button size="lg">Explore Now!</Button>
-              </motion.div>
+                <Button onClick={() => router.push('/electronics')}  size="lg">Did you check the electronics?!</Button>
+              </motion.div> 
             </div>
             <div className="grid md:grid-cols-2 gap-8">
               <motion.div
@@ -311,7 +313,7 @@ export function HomePage() {
                     <AvatarFallback>JD</AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="text-lg font-bold">John Doe</h3>
+                    <h3 className="text-lg font-bold">Srijan</h3>
                     <p className="text-muted-foreground">VIT Student</p>
                   </div>
                 </div>
@@ -327,7 +329,7 @@ export function HomePage() {
                     <AvatarFallback>SA</AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="text-lg font-bold">Sarah Aisha</h3>
+                    <h3 className="text-lg font-bold">Deepanshu</h3>
                     <p className="text-muted-foreground">VIT Student</p>
                   </div>
                 </div>
@@ -342,7 +344,7 @@ export function HomePage() {
                     <AvatarFallback>RK</AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="text-lg font-bold">Raj Kumar</h3>
+                    <h3 className="text-lg font-bold">Mahin</h3>
                     <p className="text-muted-foreground">VIT Student</p>
                   </div>
                 </div>
@@ -359,10 +361,13 @@ export function HomePage() {
             <p className="text-muted-foreground animate-fade-in-up">
               Reach out to the creator of DealHarbor, Nitin Kumar Pandey, on LinkedIn.
             </p>
-            <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground rounded-md px-4 py-2 group hover:scale-110 transition-transform duration-300 animate-fade-in-up">
-              <LinkedinIcon className="w-6 h-6" />
-              <span>@nitinkrpandey</span>
-            </div>
+            <a href='https://linkedin.com/in/nitinkrpandey' target="_blank" rel="noopener noreferrer">
+  <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground rounded-md px-4 py-2 group hover:scale-110 transition-transform duration-300 animate-fade-in-up mt-4">
+    <LinkedinIcon className="w-6 h-6" />
+    <span>@nitinkrpandey</span>
+  </div>
+</a>
+
           </div>
         </section>
       </main>
@@ -376,14 +381,17 @@ export function HomePage() {
             <Link href="#" className="text-muted-foreground hover:underline" prefetch={false}>
               About
             </Link>
-            <Link href="#" className="text-muted-foreground hover:underline" prefetch={false}>
-              How It Works
+            <Link href="/sell" className="text-muted-foreground hover:underline" prefetch={false}>
+              Sell
             </Link>
-            <Link href="#" className="text-muted-foreground hover:underline" prefetch={false}>
-              Pricing
+            <Link href="/bicycles" className="text-muted-foreground hover:underline" prefetch={false}>
+              Bicycles
             </Link>
-            <Link href="#" className="text-muted-foreground hover:underline" prefetch={false}>
-              Contact
+            <Link href="electronics" className="text-muted-foreground hover:underline" prefetch={false}>
+              Electronics
+            </Link>
+            <Link href="stationary" className="text-muted-foreground hover:underline" prefetch={false}>
+              Notes
             </Link>
           </nav>
           <div className="flex items-center gap-2 text-muted-foreground">
