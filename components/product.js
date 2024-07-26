@@ -75,7 +75,8 @@ const ProductGrid = memo(({ products }) => {
                     alt="Product Image"
                     width={600}
                     height={400}
-                    className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                    objectFit='contain'
+                    className=" w-full h-full transition-transform duration-300 hover:scale-105"
                     loading="lazy"
                   />
                 </div>
