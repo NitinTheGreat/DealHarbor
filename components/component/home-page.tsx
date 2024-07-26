@@ -155,14 +155,8 @@ export function HomePage() {
                   alt="Discover the Best Deals"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 /> */}
-                <iframe 
-  className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-lg"
-  src='https://my.spline.design/draganddropbookpencilschoolcopy-1cdceb0737c67d645306637df68411be/' 
-  frameBorder='0' 
-  width='100%' 
-  height='100%'>
-</iframe>
-
+                <iframe src='https://my.spline.design/draganddropbookpencilschoolcopycopy-f18976998c5aaf3eb3efab9f3d9d827f/' frameBorder='0' width='100%' height='100%'></iframe>
+             
               </motion.div>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
