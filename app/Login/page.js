@@ -180,7 +180,7 @@ const Login = () => {
               Welcome back!
             </h2>
             <p className="mt-2 text-center text-sm text-muted-foreground">
-              Sign in to your account and let's get started.
+              Sign in to your account and  get started.
             </p>
           </div>
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -258,7 +258,7 @@ const Login = () => {
 </button>
 <div className="mt-4 text-center text-sm">
   <p className="text-muted-foreground">
-    Don't have an account?{' '}
+    Don&apos;t have an account?{' '}
     <Link href="/Signup" className="font-medium text-pink-500 hover:text-pink-600">
       Sign Up
     </Link>
