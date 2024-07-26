@@ -138,7 +138,7 @@ const Product = ({ params }) => {
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground text-center md:text-left">
             {product
-              ? 'Discover our latest collection of premium apparel, designed to complement your modern lifestyle.'
+              ? product.description
               : 'Loading product details...'}
           </p>
           <div className="flex gap-4 justify-center">
