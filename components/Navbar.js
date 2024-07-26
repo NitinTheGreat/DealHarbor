@@ -7,7 +7,7 @@ import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { Button } from '@/components/ui/button';
-
+import Image from 'next/image';
 const Navbar = () => {
   const { cart, subTotal, addToCart, removeFromCart, clearCart } = useCart();
   const [activeLink, setActiveLink] = useState('');
@@ -152,7 +152,17 @@ const Navbar = () => {
           <div className="logoboth">
             <Link href="/" className="nav__logo">
               <div className="logo">
-                <img src="../images/logo.png" alt="logo" />
+                {/* <img src="../images/logo.png" alt="logo" />
+                 */}
+                 <Image
+        src="/images/logo.png" // Path relative to the public folder
+        alt="logo"
+        width={150} // Replace with the appropriate width
+        height={50} // Replace with the appropriate height
+        priority // Ensure the image loads eagerly
+        placeholder="blur" // Show a blurred placeholder while loading
+        blurDataURL="/images/logo-blur.png" // Optional: Provide a low-res placeholder image
+      />
                 <h1>Deal Harbor</h1>
               </div>
             </Link>

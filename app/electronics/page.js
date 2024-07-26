@@ -3,7 +3,7 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import axios from 'axios';
 import Preloader from '../../components/Preloader';
-
+import ProtectedRoute from '../../components/Protectedcomp'
 const ProductGrid = React.lazy(() => import('../../components/product'));
 
 const Electronics = () => {
@@ -89,4 +89,4 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   );
 };
 
-export default Electronics;
+export default ProtectedRoute(Electronics);

@@ -4,7 +4,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import axios from 'axios';
 import Preloader from '../../components/Preloader';
 import styles from '../../styles/Preloader.module.css'; // Ensure the path is correct
-
+import ProtectedRoute from "../../components/Protectedcomp"
 const ProductGrid = React.lazy(() => import('../../components/product'));
 
 const Stationary = () => {
@@ -92,4 +92,4 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   );
 };
 
-export default Stationary;
+export default ProtectedRoute(Stationary);

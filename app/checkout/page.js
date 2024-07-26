@@ -7,7 +7,7 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Separator } from "@/components/ui/separator"
-
+import ProtectedRoute from '../../components/Protectedcomp'
 const Checkout = () => {
   const [orders, setOrders] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
@@ -151,7 +151,7 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default ProtectedRoute(Checkout);
 
 function PackageIcon(props) {
   return (

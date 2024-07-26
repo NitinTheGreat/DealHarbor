@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Preloader from '../../../components/Preloader';
 import { ToastContainer, toast } from 'react-toastify'; // Import toast
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
-
+import ProtectedRoute from "../../../components/Protectedcomp"
 const Product = ({ params }) => {
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
@@ -172,4 +172,4 @@ const Product = ({ params }) => {
   );
 };
 
-export default Product;
+export default ProtectedRoute(Product);

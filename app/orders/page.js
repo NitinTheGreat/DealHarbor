@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Preloader from '../../components/Preloader';
-
+import ProtectedRoute from '../../components/Protectedcomp'
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -97,4 +97,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default ProtectedRoute(Orders);

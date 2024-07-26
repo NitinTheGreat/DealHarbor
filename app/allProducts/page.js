@@ -2,7 +2,7 @@
 import ProductGrid from '../../components/product';
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-
+import ProtectedRoute from '../../components/Protectedcomp'
 const AllProductsPageContent = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -72,4 +72,4 @@ const AllProductsPage = () => (
   </Suspense>
 );
 
-export default AllProductsPage;
+export default ProtectedRoute(AllProductsPage);
