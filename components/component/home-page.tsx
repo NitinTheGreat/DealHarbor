@@ -356,20 +356,28 @@ export function HomePage() {
           </div>
         </section>
         <section className="py-12 md:py-20 px-6 bg-[#f0f0f0] animate-fade-in">
-          <div className="max-w-4xl mx-auto space-y-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold animate-fade-in-up">Connect with the Creator</h2>
-            <p className="text-muted-foreground animate-fade-in-up">
-              Reach out to the creator of DealHarbor, Nitin Kumar Pandey, on LinkedIn.
-            </p>
-            <a href='https://linkedin.com/in/nitinkrpandey' target="_blank" rel="noopener noreferrer">
-  <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground rounded-md px-4 py-2 group hover:scale-110 transition-transform duration-300 animate-fade-in-up mt-4">
-    <LinkedinIcon className="w-6 h-6" />
-    <span>@nitinkrpandey</span>
+  <div className="max-w-4xl mx-auto space-y-8 text-center">
+    <h2 className="text-3xl sm:text-4xl font-bold animate-fade-in-up">Connect with the Creator</h2>
+    <p className="text-muted-foreground animate-fade-in-up">
+      Reach out to the creator of DealHarbor, Nitin Kumar Pandey, on LinkedIn or Instagram.
+    </p>
+    <div className="inline-flex items-center gap-4 mt-4">
+      <a href='https://linkedin.com/in/nitinkrpandey' target="_blank" rel="noopener noreferrer">
+        <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground rounded-md px-4 py-2 group hover:scale-110 transition-transform duration-300 animate-fade-in-up">
+          <LinkedinIcon className="w-6 h-6" />
+          <span>@nitinkrpandey</span>
+        </div>
+      </a>
+      <a href='https://instagram.com/nitinthegreat13' target="_blank" rel="noopener noreferrer">
+        <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground rounded-md px-4 py-2 group hover:scale-110 transition-transform duration-300 animate-fade-in-up">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" className="w-6 h-6" />
+          <span>@nitinthegreat13</span>
+        </div>
+      </a>
+    </div>
   </div>
-</a>
+</section>
 
-          </div>
-        </section>
       </main>
       <footer className="bg-white py-8 px-6 shadow-lg animate-fade-in">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
