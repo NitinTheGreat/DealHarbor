@@ -5,11 +5,14 @@ import Image from 'next/image';
 import Preloader from '../../../components/Preloader';
 import { ToastContainer, toast } from 'react-toastify'; // Import toast
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
-import ProtectedRoute from "../../../components/Protectedcomp"
+import ProtectedRoute from "../../../components/Protectedcomp";
+import { Button } from '@/components/ui/button';
+
 const Product = ({ params }) => {
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -74,101 +77,97 @@ const Product = ({ params }) => {
     }
   };
 
-  // Using string methods
+  const handleImageClick = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   const indexOfUnderscore = params.slug.indexOf('_');
   const Sellername =
     indexOfUnderscore !== -1 ? params.slug.substring(0, indexOfUnderscore) : params.slug;
 
   return (
-    <section className="text-gray-600 body-font overflow-hidden">
+    <div className="relative w-full min-h-screen bg-gradient-to-br from-[#f9f7fb] to-[#f0e9f4] overflow-hidden">
       <ToastContainer /> {/* Toast container to display notifications */}
       {loading ? (
         <Preloader />
       ) : (
-        <div className="container px-5 py-40 mx-auto">
-          <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <div className="lg:w-1/2 w-full lg:h-auto h-64 relative rounded overflow-hidden">
-              <Image alt="Product Image" src={product.image} layout="fill" objectFit="contain" />
-            </div>
-            <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-              <h2 className="text-sm title-font text-gray-500 tracking-widest">
-                Seller Name : {Sellername}
-              </h2>
-              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.name}</h1>
-              <div className="flex mb-4">
-                <span className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <svg
-                      key={i}
-                      fill={i < product.rating ? 'currentColor' : 'none'}
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-4 h-4 text-indigo-500"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                  ))}
-                </span>
-                <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2">
-                  <a className="text-gray-500">
-                    <svg
-                      fill="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                    </svg>
-                  </a>
-                  <a className="text-gray-500">
-                    <svg
-                      fill="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                    </svg>
-                  </a>
-                  <a className="text-gray-500">
-                    <svg
-                      fill="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                    </svg>
-                  </a>
-                </span>
+        <div className="absolute inset-0 z-[-1] animate-float-shapes">
+          <div className="absolute top-[10%] left-[20%] w-[100px] h-[100px] bg-[#ce93d8] rounded-full opacity-50 animate-float-shape" />
+          <div className="absolute bottom-[15%] right-[25%] w-[80px] h-[80px] bg-[#ba68c8] rounded-full opacity-50 animate-float-shape" />
+          <div className="absolute top-[30%] left-[40%] w-[120px] h-[120px] bg-gradient-to-br from-[#f9f7fb] to-[#f0e9f4] rounded-full opacity-50 animate-float-shape" />
+          <div className="absolute bottom-[20%] right-[15%] w-[90px] h-[90px] bg-[#ab47bc] rounded-full opacity-50 animate-float-shape" />
+          <div className="absolute top-[50%] left-[10%] w-[80px] h-[80px] bg-[#ce93d8] rounded-full opacity-50 animate-float-shape" />
+          <div className="absolute bottom-[30%] right-[5%] w-[100px] h-[100px] bg-gradient-to-br from-[#f9f7fb] to-[#f0e9f4] rounded-full opacity-50 animate-float-shape" />
+        </div>
+      )}
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-24 flex flex-col md:flex-row items-center justify-between gap-12">
+        <div className="flex-1 relative mt-[10vh] flex justify-center">
+          <div className="relative w-full max-w-md overflow-hidden group animate-slide-in-left" style={{ height: 'calc(100% + 10%)' }}>
+            {product ? (
+              <Image
+                src={product.image}
+                alt="Product"
+                layout="responsive"
+                width={640}
+                height={704} // 10% more than width (640 + 64)
+                className="rounded-xl shadow-lg transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:rotate-2 cursor-pointer"
+                onClick={handleImageClick}
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200 rounded-xl flex items-center justify-center">
+                <span className="text-gray-500">No Image Available</span>
               </div>
-              <p className="leading-relaxed">{product.description}</p>
-              <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
-              <div className="flex items-center">
-                <span className="title-font font-medium text-2xl text-gray-900">
-                  ₹{product.price.toFixed(2)}
-                </span>
-                <button
-                  onClick={handleAddToCart}
-                  className="flex w-auto ml-10 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
-                >
-                  Add To Cart
-                </button>
+            )}
+          </div>
+        </div>
+        <div className="flex-1 space-y-6 animate-slide-in-right flex flex-col items-center md:items-start">
+          <div className="text-sm text-muted-foreground text-center md:text-left">
+            Seller Name: {Sellername}
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground text-center md:text-left">
+            {product ? product.name : 'Loading...'}
+          </h1>
+          <p className="text-lg md:text-xl text-primary-foreground text-center md:text-left">
+            {product
+              ? 'Discover our latest collection of premium apparel, designed to complement your modern lifestyle.'
+              : 'Loading product details...'}
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Button size="lg" className="animate-bounce-in" onClick={handleAddToCart} disabled={!product}>
+              Add to Cart
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[999]">
+          <div className="relative bg-white p-4 rounded-lg max-w-4xl w-full h-[70vh] overflow-hidden">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={closeModal}
+            >
+              &#x2715;
+            </button>
+            {product && (
+              <div className="w-full h-full relative">
+                <Image
+                  src={product.image}
+                  alt="Product"
+                  layout="fill"
+                  objectFit="contain"
+                  className="rounded-lg cursor-zoom-in"
+                />
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 

@@ -1,10 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-const SignUpForm = () => {
+export default function SignUpForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,39 +13,35 @@ const SignUpForm = () => {
   const [passwordStrength, setPasswordStrength] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
-  const [formMessage, setFormMessage] = useState(null); // State for form submission messages
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const router = useRouter();
-  
- useEffect(() => {
-   if(localStorage.getItem('token')){
-    router.push('/')
-   }
- 
-   
- }, [])
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/');
+    }
+  }, [router]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
 
     if (id === 'password') {
-      // Password strength checking
       const strength = checkPasswordStrength(value);
       setPasswordStrength(strength);
-      // Check password match on password change
       setPasswordMatch(formData.confirmPassword === value);
     } else if (id === 'confirmPassword') {
-      // Password match checking
       setPasswordMatch(formData.password === value);
     } else if (id === 'email') {
-      // Email format validation
       setEmailValid(validateEmail(value));
     }
   };
 
   const checkPasswordStrength = (password) => {
-    // Password strength logic (replace with your desired criteria)
     if (password.length < 8) {
       return 'weak';
     } else if (password.length >= 8 && /\d/.test(password) && /[a-zA-Z]/.test(password)) {
@@ -58,14 +52,13 @@ const SignUpForm = () => {
   };
 
   const validateEmail = (email) => {
-    // Basic email format validation
     const isValid = /\S+@\S+\.\S+/.test(email);
     return isValid;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch('/api/signUp', {
         method: 'POST',
@@ -74,165 +67,242 @@ const SignUpForm = () => {
         },
         body: JSON.stringify(formData),
       });
-  
+
       const responseData = await response.json();
-  
+
       if (response.ok) {
-        setFormMessage({ type: 'success', text: responseData.message });
-        // Clear form data upon successful submission
+        setSuccessMessage('Sign-up successful! Redirecting...');
+        setIsSuccessful(true);
         setFormData({
           name: '',
           email: '',
           password: '',
           confirmPassword: '',
         });
-        toast.success('Kindly Login to Continue', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          style: { width: "auto", whiteSpace: "nowrap" }
-        });
+
         setTimeout(() => {
           router.push('/Login');
-        }, 3000);
+        }, 3000); // Wait 3 seconds before redirecting
       } else {
-        // Handle error response
-        setFormMessage({ type: 'error', text: responseData.message });
-        toast.error(responseData.message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          style: { width: "auto", whiteSpace: "nowrap" }
-        });
-        setTimeout(() => {
-          router.push('/Login');
-        }, 3000);
+        setSuccessMessage(responseData.message);
+        setIsSuccessful(false);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setFormMessage({ type: 'error', text: 'An error occurred. Please try again later.' });
     }
   };
-  
-  
 
   const isFormValid = () => {
     return emailValid && passwordMatch && formData.password.length >= 8;
   };
 
   return (
-    <div className="flex items-center justify-center h-full bg-gradient-to-b from-gray-100 via-gray-200 to-transparent mt-20">
-       <ToastContainer /> 
-      <div className="w-full md:w-3/4 lg:w-1/2 xl:w-1/3 bg-white p-8 rounded-lg shadow-lg">
-        <h3 className="mb-6 text-2xl text-center text-gray-800">Create an Account!</h3>
-        <form className="px-4 py-6 bg-white rounded" onSubmit={handleSubmit}>
-          {formMessage && (
-            <div className={`mb-4 text-center text-sm ${formMessage.type === 'success' ? 'text-green-500' : 'text-red-500'}`}>
-              {formMessage.text}
-            </div>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8 p-8 rounded-lg shadow-lg mt-14">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-foreground">Create your account</h2>
+          {successMessage && (
+            <p className={`mt-2 text-center text-sm ${isSuccessful ? 'text-green-500' : 'text-red-500'}`}>
+              {successMessage}
+            </p>
           )}
-          <div className="mb-4">
-            <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="name">
+          <p className="mt-2 text-center text-sm text-pink-300">
+            Or{" "}
+            <a className="font-medium text-pink-500 hover:text-pink-400" href="Login">
+              sign in to your existing account
+            </a>
+          </p>
+        </div>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-muted-foreground">
               Name
             </label>
-            <input
-              className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              placeholder="Your Name"
-              onChange={handleInputChange}
-              value={formData.name}
-              required
-            />
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                className="h-10 border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 block w-full rounded-md border-gray-300 pr-10 focus:border-primary focus:ring-primary sm:text-sm"
+                placeholder="Enter your name"
+                onChange={handleInputChange}
+                value={formData.name}
+              />
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="email">
-              Email
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-muted-foreground">
+              Email address
             </label>
-            <input
-              className={`w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${emailValid ? 'border-green-500' : 'border-red-500'}`}
-              id="email"
-              type="email"
-              placeholder="Email"
-              onChange={handleInputChange}
-              value={formData.email}
-              required
-            />
-            {emailValid && (
-              <p className="text-xs italic text-green-500">Email is correct.</p>
-            )}
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className={`h-10 border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 block w-full rounded-md border-gray-300 pr-10 focus:border-primary focus:ring-primary sm:text-sm ${emailValid ? 'border-green-500' : 'border-red-500'}`}
+                placeholder="you@example.com"
+                onChange={handleInputChange}
+                value={formData.email}
+              />
+              {emailValid && (
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                  <CheckIcon className="h-5 w-5 text-green-500" aria-hidden="true" />
+                </div>
+              )}
+            </div>
             {!emailValid && (
               <p className="text-xs italic text-red-500">Please enter a valid email address.</p>
             )}
           </div>
-          <div className="mb-4 md:flex md:justify-between">
-            <div className="mb-4 md:mr-2 md:mb-0">
-              <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="password">
-                Password
-              </label>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-muted-foreground">
+              Password
+            </label>
+            <div className="mt-1 relative rounded-md shadow-sm">
               <input
-                className={`w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${passwordStrength === 'weak' ? 'border-red-500' : passwordStrength === 'strong' ? 'border-yellow-500' : passwordStrength === 'very-strong' ? 'border-green-500' : ''}`}
                 id="password"
-                type="password"
-                placeholder="******************"
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                required
+                className={`h-10 border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 block w-full rounded-md border-gray-300 pr-10 focus:border-primary focus:ring-primary sm:text-sm ${passwordStrength === 'weak' ? 'border-red-500' : passwordStrength === 'strong' ? 'border-yellow-500' : passwordStrength === 'very-strong' ? 'border-green-500' : ''}`}
+                placeholder="Password"
                 onChange={handleInputChange}
                 value={formData.password}
-                required
               />
-              {formData.password.length > 0 && (
-                <p
-                  className={`text-xs italic ${
-                    passwordStrength === 'weak'
-                      ? 'text-red-500'
-                      : passwordStrength === 'strong'
-                        ? 'text-yellow-500'
-                        : passwordStrength === 'very-strong'
-                          ? 'text-green-500'
-                          : ''
-                  }`}
-                >
-                  Password strength: {passwordStrength || 'weak'}
-                </p>
-              )}
-            </div>
-            <div className="md:ml-2">
-              <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="confirmPassword">
-                Confirm Password
-              </label>
-              <input
-                className={`w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${passwordMatch ? 'border-green-500' : 'border-red-500'}`}
-                id="confirmPassword"
-                type="password"
-                placeholder="******************"
-                onChange={handleInputChange}
-                value={formData.confirmPassword}
-                required
-              />
-              {!passwordMatch && (
-                <p className="text-xs italic text-red-500">Passwords do not match.</p>
-              )}
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center pr-3"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOffIcon className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                ) : (
+                  <EyeIcon className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                )}
+              </button>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-12 space-x-2">
+                {formData.password.length > 0 && (
+                  <div className="flex items-center space-x-2">
+                    <div className={`h-2 w-2 rounded-full ${passwordStrength === 'very-strong' ? 'bg-green-500' : passwordStrength === 'strong' ? 'bg-yellow-500' : 'bg-red-500'}`} />
+                    <span className="text-sm text-muted-foreground">{passwordStrength === 'very-strong' ? 'Strong' : passwordStrength === 'strong' ? 'Moderate' : 'Weak'}</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <hr className="mb-6 border-t" />
-          <div className="mb-6 text-center">
+          <div>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-muted-foreground">
+              Confirm Password
+            </label>
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type={showConfirmPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                required
+                className={`h-10 border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 block w-full rounded-md border-gray-300 pr-10 focus:border-primary focus:ring-primary sm:text-sm ${passwordMatch ? 'border-green-500' : 'border-red-500'}`}
+                placeholder="Confirm Password"
+                onChange={handleInputChange}
+                value={formData.confirmPassword}
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center pr-3"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <EyeOffIcon className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                ) : (
+                  <EyeIcon className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                )}
+              </button>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-12 space-x-2">
+                {formData.confirmPassword.length > 0 && (
+                  <div className="flex items-center space-x-2">
+                    <div className={`h-2 w-2 rounded-full ${passwordMatch ? 'bg-green-500' : 'bg-red-500'}`} />
+                    <span className="text-sm text-muted-foreground">{passwordMatch ? 'Match' : 'No Match'}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div>
             <button
-              className={`w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline ${isFormValid() ? '' : 'opacity-50 cursor-not-allowed'}`}
               type="submit"
+              className={`w-full h-10 rounded-md border border-transparent bg-pink-600 py-2 px-4 text-sm font-medium text-white shadow-sm ring-offset-background hover:bg-pink-400 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${isFormValid() ? 'opacity-100 cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
               disabled={!isFormValid()}
             >
-              Register Account
+              Sign Up
             </button>
           </div>
         </form>
       </div>
     </div>
   );
-};
+}
 
-export default SignUpForm;
+function EyeIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 5C7.03 5 3.28 8.66 2 12c1.28 3.34 5.03 7 10 7s8.72-3.66 10-7c-1.28-3.34-5.03-7-10-7zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" />
+    </svg>
+  );
+}
+
+function EyeOffIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-muted-foreground" // Use this class to apply consistent styling if needed
+    >
+      <path d="M1 12c1.5-3.1 5.1-6 11-6s9.5 2.9 11 6-4.5 6-11 6S2.5 15.1 1 12z" />
+      <path d="M10.3 10.3c.6-.6 1.4-.8 2.2-.8s1.6.2 2.2.8" />
+      <path d="M4.9 4.9L19.1 19.1" />
+    </svg>
+  );
+}
+
+function CheckIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  );
+}
