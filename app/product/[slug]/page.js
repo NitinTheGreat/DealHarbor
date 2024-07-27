@@ -141,6 +141,11 @@ const Product = ({ params }) => {
               ? product.description
               : 'Loading product details...'}
           </p>
+          <p className="text-6xl md:text-xl text-primary-foreground text-center md:text-left text-pink-500">
+           ₹ {product
+              ? product.price
+              : 'Loading price...'}
+          </p>
           <div className="flex gap-4 justify-center">
             <Button
               size="lg"
